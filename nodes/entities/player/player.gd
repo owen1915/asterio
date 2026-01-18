@@ -1,0 +1,36 @@
+extends Entity
+class_name Player
+
+@onready var jet: Sprite2D = $jet
+
+func _ready() -> void:
+	pass
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("inventory"):
+		var ui = get_tree().get_first_node_in_group("inventory_ui")
+		ui.visible = !ui.visible
+		ui.update_inventory()
+
+func _physics_process(delta: float) -> void:
+	var dir := Vector2.ZERO
+	
+	if Input.is_action_pressed("w"):
+		dir.y = -1
+	elif Input.is_action_pressed("s"):
+		dir.y = 1
+	
+	if Input.is_action_pressed("a"):
+		dir.x = -1
+	elif Input.is_action_pressed("d"):
+		dir.x = 1
+
+	velocity = dir.normalized() * speed
+	if velocity != Vector2.ZERO:
+		var target_angle = velocity.angle() + (PI / 2)
+		rotation = lerp_angle(rotation, target_angle, 0.2)
+		jet.visible = true
+	else:
+		jet.visible = false
+		
+	super(delta)

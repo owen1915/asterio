@@ -8,7 +8,6 @@ will come and decide their fate.
 # implementation priorties
 1. **Basic player controls and basic map setup**
    - Movement in 2D space
-   - Camera follow
    - Simple map tiles or floating platforms
    - Placeholder art for player and environment
 
