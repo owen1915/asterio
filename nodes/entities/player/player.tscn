@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvxpq44cd8agt"]
+[gd_scene load_steps=9 format=3 uid="uid://bvxpq44cd8agt"]
 
 [ext_resource type="Script" uid="uid://cea1qnbyi51og" path="res://nodes/entities/player/player.gd" id="1_khfle"]
 [ext_resource type="Texture2D" uid="uid://wuxlclf5jqk0" path="res://nodes/entities/player/res/player.png" id="2_fn53c"]
 [ext_resource type="Texture2D" uid="uid://d07lobp310tjr" path="res://nodes/entities/player/res/flame.png" id="2_osu55"]
 [ext_resource type="PackedScene" uid="uid://40x5bhpe42vo" path="res://nodes/camera/camera.tscn" id="3_fn53c"]
 [ext_resource type="Texture2D" uid="uid://dfaf70byrfg6p" path="res://nodes/entities/player/res/player-flash.png" id="4_4j62c"]
+[ext_resource type="Script" uid="uid://e1jrlfrl707b" path="res://nodes/entities/player/inventory.gd" id="6_rx6bh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hs1md"]
 animations = [{
@@ -40,3 +41,6 @@ visible = false
 shape = SubResource("CircleShape2D_osu55")
 
 [node name="Camera" parent="." instance=ExtResource("3_fn53c")]
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("6_rx6bh")

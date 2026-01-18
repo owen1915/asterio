@@ -2,15 +2,16 @@ extends Entity
 class_name Player
 
 @onready var jet: Sprite2D = $jet
+@onready var inventory: Node = $Inventory
+
+const SPACE_PLATFORM = preload("res://items/platform.tres")
 
 func _ready() -> void:
-	pass
+	inventory.add_item(SPACE_PLATFORM, 9)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("inventory"):
-		var ui = get_tree().get_first_node_in_group("inventory_ui")
-		ui.visible = !ui.visible
-		ui.update_inventory()
+	pass
+	
 
 func _physics_process(delta: float) -> void:
 	var dir := Vector2.ZERO

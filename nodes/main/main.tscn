@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcd34wh6yo0te"]
+[gd_scene load_steps=4 format=3 uid="uid://bcd34wh6yo0te"]
 
 [ext_resource type="PackedScene" uid="uid://b2hndxdakfm2t" path="res://nodes/background/background.tscn" id="1_irdys"]
 [ext_resource type="PackedScene" uid="uid://bvxpq44cd8agt" path="res://nodes/entities/player/player.tscn" id="3_71dvi"]
+[ext_resource type="PackedScene" uid="uid://dcynqtnpj0qi" path="res://gui/Inventory.tscn" id="3_oyjv7"]
 
 [node name="main" type="Node2D"]
+position = Vector2(960, 540)
 
 [node name="Background" parent="." instance=ExtResource("1_irdys")]
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_71dvi")]
+
+[node name="Inventory" parent="." groups=["inventory"] instance=ExtResource("3_oyjv7")]
