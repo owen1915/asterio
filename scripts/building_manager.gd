@@ -18,31 +18,33 @@ var removing = false
 var remove_timer = 0.0
 const REMOVE_TIME = 0.25
 
+var grid = 16
+
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	var tile_size = 16
-	var half_tile = tile_size / 2
-	var mouse_pos = get_global_mouse_position()
-	var snapped_x = floor(mouse_pos.x / tile_size) * tile_size + half_tile
-	var snapped_y = floor(mouse_pos.y / tile_size) * tile_size + half_tile
-	var snapped_pos = Vector2(snapped_x, snapped_y)
+	if not main.get_item():
+		if scene:
+			world.remove_child(scene)
+			instantiated = false
+		return
 	
-	_handle_removal(delta, snapped_pos)
-	
-	if main.get_item() and (not curr_item or main.get_item() != curr_item):
+	if not curr_item or main.get_item() != curr_item:
 		if scene:
 			world.remove_child(scene)
 		curr_item = main.get_item()
 		print("reset")
 		instantiated = false
 	
-	if not main.get_item():
-		if scene:
-			world.remove_child(scene)
-			instantiated = false
-		return
+	var mouse_pos = get_global_mouse_position()
+	var anchor_x = floor(mouse_pos.x / grid) * grid + grid / 2
+	var anchor_y = floor(mouse_pos.y / grid) * grid + grid / 2
+	var anchor_pos = Vector2(anchor_x, anchor_y)
+	
+	var half = curr_item.tile_size / 2
+	var visual_pos = anchor_pos + Vector2(half - grid / 2, half - grid / 2)
+	_handle_removal(delta, anchor_pos)
 
 	if scene:
 		scene.z_index = 100
@@ -53,44 +55,58 @@ func _process(delta: float) -> void:
 	
 	# Update can_place based on item type
 	if curr_item:
-		can_place = _can_place_at(snapped_pos, curr_item)
+		can_place = _can_place_at(anchor_pos, curr_item)
 	
 	if curr_item and curr_item.buildable and !instantiated:
 		scene = curr_item.scene.instantiate()
 		world.add_child(scene)
 		instantiated = true
 	elif instantiated:
-		scene.global_position = snapped_pos
+		scene.global_position = visual_pos
 	if (curr_item == null or !curr_item.buildable) and scene:
 		scene.queue_free()
 		instantiated = false
 	
 	if Input.is_action_just_pressed("placed") and curr_item and curr_item.buildable and can_place:
-		place_item(snapped_pos)
+		place_item(anchor_pos)
 
-func _can_place_at(position: Vector2, item_data: ItemData) -> bool:
+func _can_place_at(anchor_pos: Vector2, item_data: ItemData) -> bool:
 	if item_data.item_name == "platform":
 		# Platforms can only go on empty ground and next to other platform
-		if position in platforms:
+		if anchor_pos in platforms:
 			return false
-		
-		var tilesize = 16
+			
+		var offset = 16
 		var neighbors = [
-			position + Vector2(tilesize, 0), # right
-			position - Vector2(tilesize, 0), # left
-			position + Vector2(0, tilesize), # down
-			position - Vector2(0, tilesize) # up
+			anchor_pos + Vector2(offset, 0), # right
+			anchor_pos - Vector2(offset, 0), # left
+			anchor_pos + Vector2(0, offset), # down
+			anchor_pos - Vector2(0, offset) # up
 		]
-		
 		for n in neighbors:
 			if n in platforms:
 				return true
 		return false
 	else:
 		# Buildings need a platform underneath and no existing building
-		var has_platform = position in platforms
-		var no_building = not position in buildings
-		return has_platform and no_building
+		if item_data.tile_size == 16:
+			var has_platform = anchor_pos in platforms
+			var no_building = not anchor_pos in buildings
+			return has_platform and no_building
+		elif item_data.tile_size == 32:
+			var offset = 16
+			var footprint = [
+				anchor_pos + Vector2(0, 0), # current tile
+				anchor_pos + Vector2(offset, 0), # right tile
+				anchor_pos + Vector2(0, offset), # bottom tile
+				anchor_pos + Vector2(offset, offset) # bottom right tile
+			]
+			
+			for n in footprint:
+				if n not in platforms:
+					return false
+			return true
+		return false
 
 func _handle_removal(delta: float, snapped_pos: Vector2) -> void:
 	var has_something = _has_removable_at(snapped_pos)
@@ -140,7 +156,10 @@ func place_item(position: Vector2) -> void:
 		
 	var new_scene = item_data.scene.instantiate()
 	new_scene.item_data = item_data
-	new_scene.global_position = position
+	
+	var half = item_data.tile_size / 2
+	var visual_pos = position + Vector2(half - grid / 2, half - grid / 2)
+	new_scene.global_position = visual_pos
 	new_scene.not_ghost = true
 	world.add_child(new_scene)
 	

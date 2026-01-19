@@ -7,3 +7,4 @@ extends Resource
 @export var max_stack: int = 99
 @export var buildable = false
 @export var scene: PackedScene
+@export var tile_size: int = 16

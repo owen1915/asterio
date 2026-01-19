@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://clgn8n8jafwxs"]
+
+[ext_resource type="Script" uid="uid://ikjradt5n2tm" path="res://build/core/core.gd" id="1_ecbbi"]
+[ext_resource type="Texture2D" uid="uid://ccfscgxp63v15" path="res://build/core/sprite/core.png" id="1_ljiit"]
+[ext_resource type="Texture2D" uid="uid://dtk7w2j65ukvo" path="res://gui/res/32x32_under.png" id="3_iaers"]
+[ext_resource type="Texture2D" uid="uid://dpc1yk6a421rt" path="res://gui/res/32x32_progress-export.png" id="4_iaers"]
+
+[node name="Core" type="StaticBody2D"]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_ecbbi")
+max_health = 500
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ljiit")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-14, -14, -10, -14, -10, -13, -4, -13, -4, -12, 4, -12, 4, -13, 10, -13, 10, -14, 14, -14, 14, -9, 13, -9, 13, -3, 12, -3, 12, 3, 13, 3, 13, 9, 14, 9, 14, 14, 10, 14, 10, 13, 4, 13, 4, 12, -4, 12, -4, 13, -10, 13, -10, 14, -14, 14, -14, 9, -13, 9, -13, 3, -12, 3, -12, -3, -13, -3, -13, -9, -14, -9)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -13.0
+offset_top = 15.0
+offset_right = 27.0
+offset_bottom = 55.0
+value = 100.0
+rounded = true
+texture_under = ExtResource("3_iaers")
+texture_progress = ExtResource("4_iaers")
+texture_progress_offset = Vector2(1, 1)

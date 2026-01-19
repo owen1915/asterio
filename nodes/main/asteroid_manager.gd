@@ -5,7 +5,7 @@ extends Node2D
 var spawn_factor = 1
 const SPAWN_SPEED = Vector2(5, 15)
 
-var speed_factor = 1
+var speed_factor = 2
 const ASTEROID_SPEED = Vector2(25, 50)
 
 var asteroids_alive = 0
@@ -33,6 +33,7 @@ func spawn_asteroid() -> void:
 	asteroids_alive += 1
 
 func start_spawn_timer() -> void:
-	await get_tree().create_timer(randi_range(SPAWN_SPEED.x, SPAWN_SPEED.y) * spawn_factor).timeout
+	#await get_tree().create_timer(randi_range(SPAWN_SPEED.x, SPAWN_SPEED.y) * spawn_factor).timeout
+	await get_tree().create_timer(0.05).timeout
 	spawn_asteroid()
 	start_spawn_timer()

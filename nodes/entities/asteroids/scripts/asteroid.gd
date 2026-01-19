@@ -20,9 +20,7 @@ func kill() -> void:
 	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print(body.is_in_group("spikes"))
-	print(body.not_ghost)
-	if body.is_in_group("spikes") and body.not_ghost:
+	if body.is_in_group("breakable") and body.not_ghost:
 		body.take_damage(damage)
 		kill()
 		print(body.name)

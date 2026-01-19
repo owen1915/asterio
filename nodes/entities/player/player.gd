@@ -6,10 +6,12 @@ class_name Player
 
 const SPACE_PLATFORM = preload("res://items/platform.tres")
 const SPIKE = preload("res://items/spike.tres")
+const CORE = preload("res://items/core.tres")
 
 func _ready() -> void:
-	inventory.add_item(SPACE_PLATFORM, 12)
-	inventory.add_item(SPIKE, 12)
+	inventory.add_item(SPACE_PLATFORM, 99)
+	inventory.add_item(SPIKE, 4)
+	inventory.add_item(CORE, 1)
 
 func _process(delta: float) -> void:
 	pass
