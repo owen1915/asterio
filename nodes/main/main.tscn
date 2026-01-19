@@ -1,14 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcd34wh6yo0te"]
+[gd_scene load_steps=8 format=3 uid="uid://bcd34wh6yo0te"]
 
+[ext_resource type="Script" uid="uid://bc6i7pw86q7h3" path="res://scripts/game.gd" id="1_bxlbv"]
 [ext_resource type="PackedScene" uid="uid://b2hndxdakfm2t" path="res://nodes/background/background.tscn" id="1_irdys"]
+[ext_resource type="Script" uid="uid://bq855da3d4gt3" path="res://scripts/building_manager.gd" id="2_oyjv7"]
 [ext_resource type="PackedScene" uid="uid://bvxpq44cd8agt" path="res://nodes/entities/player/player.tscn" id="3_71dvi"]
 [ext_resource type="PackedScene" uid="uid://dcynqtnpj0qi" path="res://gui/Inventory.tscn" id="3_oyjv7"]
+[ext_resource type="Texture2D" uid="uid://bx4yo2udbfeyf" path="res://gui/res/circle_under.png" id="6_paj5s"]
+[ext_resource type="Texture2D" uid="uid://dgo5m58bow8v2" path="res://gui/res/circle_texture-export.png" id="7_paj5s"]
 
 [node name="main" type="Node2D"]
-position = Vector2(960, 540)
+script = ExtResource("1_bxlbv")
 
 [node name="Background" parent="." instance=ExtResource("1_irdys")]
+position = Vector2(960, 540)
+
+[node name="World" type="Node2D" parent="."]
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_71dvi")]
+position = Vector2(960, 540)
 
 [node name="Inventory" parent="." groups=["inventory"] instance=ExtResource("3_oyjv7")]
+
+[node name="BuildingManager" type="Node2D" parent="."]
+script = ExtResource("2_oyjv7")
+
+[node name="RemoveIndicator" type="TextureProgressBar" parent="BuildingManager"]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 0.25
+fill_mode = 4
+texture_under = ExtResource("6_paj5s")
+texture_progress = ExtResource("7_paj5s")

@@ -18,9 +18,11 @@ func _process(delta: float) -> void:
 		update_selected_slot(4)
 	elif Input.is_action_just_pressed("5"):
 		update_selected_slot(5)
-	print(selected_slot)
 
 func update_selected_slot(new_slot) -> void:
+	if new_slot == selected_slot:
+		return
+	
 	var index = 1
 	for c in get_children():
 		if index == new_slot:
@@ -32,18 +34,37 @@ func update_selected_slot(new_slot) -> void:
 
 func clear_inventory() -> void:
 	for c in get_children():
+		c.item_data = null # THIS IS THE FIX
 		c.get_node("TextureRect").texture = null
 		c.get_node("Label").text = ""
+		c.empty = true
 
 func update_inventory(item_data, quantity) -> void:
 	for c in get_children():
 		if c.item_data == item_data:
+			if quantity <= 0:
+				# COMPLETELY RESET THE SLOT
+				c.item_data = null
+				c.get_node("TextureRect").texture = null
+				c.get_node("Label").text = ""
+				c.empty = true 
+				return
 			c.get_node("Label").text = str(quantity)
 			return
 	
+	# If not found, add to first empty slot
 	for c in get_children():
 		if c.empty:
+			c.item_data = item_data
 			c.get_node("TextureRect").texture = item_data.texture
 			c.get_node("Label").text = str(quantity)
+			c.empty = false
 			return
 	
+func get_item_selected() -> ItemData:
+	var index = 1
+	for c in get_children():
+		if index == selected_slot:
+			return c.item_data
+		index += 1
+	return null
