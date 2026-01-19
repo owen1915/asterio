@@ -2,7 +2,7 @@ extends Node2D
 
 var platform = preload("res://build/platform/platform.tscn")
 @onready var building_manager: Node2D = $"../BuildingManager"
-
+var CORE = preload("res://build/core/core.tscn")
 
 func _ready() -> void:
 	# add platform to center of world
@@ -34,3 +34,11 @@ func _ready() -> void:
 	building_manager.core_four[pos2] = plat2
 	building_manager.core_four[pos3] = plat3
 	building_manager.core_four[pos4] = plat4
+	
+	# add core
+	var core = CORE.instantiate()
+	core.item_data = preload("res://items/core.tres")
+	core.global_position = pos1 + Vector2(8, 8)
+	add_child(core)
+	building_manager.buildings[pos1] = core
+	

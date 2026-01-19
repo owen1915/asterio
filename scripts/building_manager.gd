@@ -70,12 +70,11 @@ func _process(delta: float) -> void:
 		place_item(anchor_pos)
 
 func _can_place_at(anchor_pos: Vector2, item_data: ItemData) -> bool:
+	if _is_blocked_by_building(anchor_pos):
+		return false
 	if item_data.item_name == "platform":
 		# Platforms can only go on empty ground and next to other platform
 		if anchor_pos in platforms:
-			return false
-			
-		if _is_blocked_by_building(anchor_pos):
 			return false
 		
 		var offset = 16
@@ -92,9 +91,7 @@ func _can_place_at(anchor_pos: Vector2, item_data: ItemData) -> bool:
 	else:
 		# Buildings need a platform underneath and no existing building
 		if item_data.tile_size == 16:
-			var has_platform = anchor_pos in platforms
-			var no_building = not anchor_pos in buildings
-			return has_platform and no_building
+			return anchor_pos in platforms
 		elif item_data.tile_size == 32:
 			if item_data.item_name == "Thruster":
 				var offset = 16
@@ -160,9 +157,9 @@ func _is_blocked_by_building(check_pos: Vector2) -> bool:
 	return false
 
 func _handle_removal(delta: float, snapped_pos: Vector2) -> void:
-	var has_something = _has_removable_at(snapped_pos)
+	var can_remove = _can_remove_at(snapped_pos)
 	
-	if Input.is_action_pressed("remove") and has_something:
+	if Input.is_action_pressed("remove") and can_remove:
 		if not removing:
 			removing = true
 			remove_timer = 0.0
@@ -170,7 +167,7 @@ func _handle_removal(delta: float, snapped_pos: Vector2) -> void:
 		remove_timer += delta
 		if remove_timer >= REMOVE_TIME:
 			_remove_top_layer(snapped_pos)
-			_cancel_removal()  # Reset so they have to hold again for next layer
+			_cancel_removal()
 	else:
 		if removing:
 			_cancel_removal()
@@ -182,16 +179,14 @@ func _remove_top_layer(position: Vector2) -> void:
 	# Buildings get removed first (top layer)
 	if position in buildings:
 		var building_node = buildings[position]
-		if building_node.is_in_group("unremovable"):
-			return
 		var item_data = building_node.item_data
 		building_node.queue_free()
 		buildings.erase(position)
 		main.player.inventory.add_item(item_data, 1)
 		return
 	
-	# Then platforms (bottom layer)
-	if position in platforms and position not in core_four:
+	# Platforms
+	if position in platforms:
 		var platform_node = platforms[position]
 		var item_data = platform_node.item_data
 		platform_node.queue_free()
@@ -223,3 +218,137 @@ func place_item(position: Vector2) -> void:
 		buildings[position] = new_scene
 	
 	main.player.inventory.remove_item(item_data, 1)
+
+func _can_remove_at(position: Vector2) -> bool:
+	"""Check if we're allowed to remove what's at this position"""
+	
+	# Can't remove if nothing there
+	if position not in buildings and position not in platforms:
+		return false
+	
+	# Buildings - check if it's marked unremovable
+	if position in buildings:
+		var building_node = buildings[position]
+		if building_node.is_in_group("unremovable"):
+			return false
+		return true
+	
+	# Platforms - check multiple conditions
+	if position in platforms:
+		# Can't remove core platforms
+		if position in core_four:
+			return false
+		
+		# Can't remove if it has buildings on it
+		if _has_building_on_platform(position):
+			return false
+		
+		# Can't remove if it would disconnect other platforms
+		if _would_disconnect_platforms(position):
+			return false
+		
+		return true
+	
+	return false
+
+func _has_building_on_platform(platform_pos: Vector2) -> bool:
+	"""Check if any building depends on this platform"""
+	var offset = 16
+	
+	for building_anchor in buildings.keys():
+		var building = buildings[building_anchor]
+		
+		if not building or not building.item_data:
+			continue
+		
+		var building_footprint = []
+		
+		# Get footprint based on building type
+		if building.item_data.item_name == "Thruster":
+			# Thruster needs the 2 platforms directly above it
+			building_footprint = [
+				building_anchor + Vector2(0, -offset),      # above-left
+				building_anchor + Vector2(offset, -offset)  # above-right
+			]	
+		elif building.item_data.tile_size == 32:
+			# 2x2 building
+			building_footprint = [
+				building_anchor + Vector2(0, 0),
+				building_anchor + Vector2(offset, 0),
+				building_anchor + Vector2(0, offset),
+				building_anchor + Vector2(offset, offset)
+			]
+		elif building.item_data.tile_size == 16:
+			# 1x1 building
+			building_footprint = [building_anchor]
+		
+		# If this building needs this platform
+		if platform_pos in building_footprint:
+			return true
+	
+	return false
+
+func _would_disconnect_platforms(platform_pos: Vector2) -> bool:
+	"""Check if removing this platform would disconnect others from core"""
+	var offset = 16
+	
+	# Get neighbors of the platform we want to remove
+	var neighbors = [
+		platform_pos + Vector2(offset, 0),
+		platform_pos - Vector2(offset, 0),
+		platform_pos + Vector2(0, offset),
+		platform_pos - Vector2(0, offset)
+	]
+	
+	# Filter to only platform neighbors
+	var platform_neighbors = []
+	for n in neighbors:
+		if n in platforms:
+			platform_neighbors.append(n)
+	
+	# If no neighbors, safe to remove
+	if len(platform_neighbors) == 0:
+		return false
+	
+	# Temporarily remove this platform and check connectivity
+	var temp_platforms = platforms.duplicate()
+	temp_platforms.erase(platform_pos)
+	
+	# Check if all neighbors are still connected to core
+	for neighbor in platform_neighbors:
+		if not _is_connected_to_core(neighbor, temp_platforms):
+			return true  # Would disconnect this neighbor
+	
+	return false
+
+func _is_connected_to_core(start_pos: Vector2, platform_dict: Dictionary) -> bool:
+	"""Check if a position can reach core_four through platform_dict"""
+	var visited = []
+	var to_check = [start_pos]
+	var offset = 16
+	
+	while len(to_check) > 0:
+		var current = to_check.pop_front()
+		
+		if current in visited:
+			continue
+		
+		visited.append(current)
+		
+		# Found connection to core
+		if current in core_four:
+			return true
+		
+		# Check neighbors
+		var neighbors = [
+			current + Vector2(offset, 0),
+			current - Vector2(offset, 0),
+			current + Vector2(0, offset),
+			current - Vector2(0, offset)
+		]
+		
+		for neighbor in neighbors:
+			if neighbor in platform_dict and neighbor not in visited:
+				to_check.append(neighbor)
+	
+	return false

@@ -13,7 +13,7 @@ const THRUSTER = preload("res://items/thruster.tres")
 func _ready() -> void:
 	inventory.add_item(SPACE_PLATFORM, 99)
 	inventory.add_item(SPIKE, 4)
-	inventory.add_item(CORE, 1)
+	#inventory.add_item(CORE, 1)
 	inventory.add_item(TURRET, 10)
 	inventory.add_item(THRUSTER, 4)
 	super()
