@@ -11,8 +11,8 @@ const ASTEROID_SPEED = Vector2(25, 50)
 var asteroids_alive = 0
 var max_asteroids = 10
 
-var spawn_range_min = Vector2(704, 100)
-var spawn_range_max = Vector2(1216, 100)
+var spawn_range_min = Vector2(550, 100)
+var spawn_range_max = Vector2(1400, 100)
 
 var asteroid_scene = preload("res://nodes/entities/asteroids/asteroid.tscn")
 
@@ -34,6 +34,6 @@ func spawn_asteroid() -> void:
 
 func start_spawn_timer() -> void:
 	#await get_tree().create_timer(randi_range(SPAWN_SPEED.x, SPAWN_SPEED.y) * spawn_factor).timeout
-	await get_tree().create_timer(0.05).timeout
+	await get_tree().create_timer(0.01).timeout
 	spawn_asteroid()
 	start_spawn_timer()

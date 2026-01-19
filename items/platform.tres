@@ -15,4 +15,5 @@ texture = SubResource("AtlasTexture_1p631")
 max_stack = 99
 buildable = true
 scene = ExtResource("1_qw7ag")
+tile_size = 16
 metadata/_custom_type_script = "uid://cfni3sbrritcn"

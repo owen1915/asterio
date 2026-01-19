@@ -24,6 +24,11 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	var mouse_pos = get_global_mouse_position()
+	var anchor_x = floor(mouse_pos.x / grid) * grid + grid / 2
+	var anchor_y = floor(mouse_pos.y / grid) * grid + grid / 2
+	var anchor_pos = Vector2(anchor_x, anchor_y)
+	_handle_removal(delta, anchor_pos)
 	if not main.get_item():
 		if scene:
 			world.remove_child(scene)
@@ -36,15 +41,10 @@ func _process(delta: float) -> void:
 		curr_item = main.get_item()
 		print("reset")
 		instantiated = false
-	
-	var mouse_pos = get_global_mouse_position()
-	var anchor_x = floor(mouse_pos.x / grid) * grid + grid / 2
-	var anchor_y = floor(mouse_pos.y / grid) * grid + grid / 2
-	var anchor_pos = Vector2(anchor_x, anchor_y)
-	
+		
 	var half = curr_item.tile_size / 2
 	var visual_pos = anchor_pos + Vector2(half - grid / 2, half - grid / 2)
-	_handle_removal(delta, anchor_pos)
+	
 
 	if scene:
 		scene.z_index = 100
@@ -131,6 +131,8 @@ func _remove_top_layer(position: Vector2) -> void:
 	# Buildings get removed first (top layer)
 	if position in buildings:
 		var building_node = buildings[position]
+		if building_node.is_in_group("unremovable"):
+			return
 		var item_data = building_node.item_data
 		building_node.queue_free()
 		buildings.erase(position)
