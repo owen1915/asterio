@@ -5,9 +5,11 @@ class_name Player
 @onready var inventory: Node = $Inventory
 
 const SPACE_PLATFORM = preload("res://items/platform.tres")
+const SPIKE = preload("res://items/spike.tres")
 
 func _ready() -> void:
-	inventory.add_item(SPACE_PLATFORM, 9)
+	inventory.add_item(SPACE_PLATFORM, 12)
+	inventory.add_item(SPIKE, 12)
 
 func _process(delta: float) -> void:
 	pass

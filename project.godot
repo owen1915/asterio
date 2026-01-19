@@ -101,6 +101,7 @@ remove={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Buildings"
+2d_physics/layer_3="Asterroids"
 
 [rendering]
 

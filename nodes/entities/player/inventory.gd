@@ -29,7 +29,7 @@ func remove_item(item_data, remove_amnt) -> void:
 				# Item is gone!s
 				inventory_arr.remove_at(i)
 				# Tell the UI to refresh entirely or clear that slot
-				inventory_ui.clear_inventory() 
+				inventory_ui.clear_slot() 
 				# Re-draw the remaining items (if you have a redraw function)
 				# _repopulate_ui() 
 			else:

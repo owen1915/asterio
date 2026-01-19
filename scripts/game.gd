@@ -7,6 +7,8 @@ var item_selected : ItemData
 @onready var inventory_container = $Inventory/PanelContainer/GridContainer
 @onready var building_manager: Node2D = $BuildingManager
 
+var player_craft_speed = 0
+
 func _ready() -> void:
 	pass
 

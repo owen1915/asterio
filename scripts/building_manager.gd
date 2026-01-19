@@ -6,15 +6,20 @@ extends Node2D
 var scene: Node
 var instantiated = false
 var can_place = true
+var curr_item = null
 
 # Separate layers
 var platforms = {}   # Vector2 -> Node
 var buildings = {}   # Vector2 -> Node
+var core_four = {}
 
 # Removal state
 var removing = false
 var remove_timer = 0.0
 const REMOVE_TIME = 0.25
+
+func _ready() -> void:
+	pass
 
 func _process(delta: float) -> void:
 	var tile_size = 16
@@ -26,6 +31,19 @@ func _process(delta: float) -> void:
 	
 	_handle_removal(delta, snapped_pos)
 	
+	if main.get_item() and (not curr_item or main.get_item() != curr_item):
+		if scene:
+			world.remove_child(scene)
+		curr_item = main.get_item()
+		print("reset")
+		instantiated = false
+	
+	if not main.get_item():
+		if scene:
+			world.remove_child(scene)
+			instantiated = false
+		return
+
 	if scene:
 		scene.z_index = 100
 		if can_place:
@@ -34,26 +52,40 @@ func _process(delta: float) -> void:
 			scene.modulate = Color(1.0, 0.3, 0.3, 0.5)
 	
 	# Update can_place based on item type
-	if main.get_item():
-		can_place = _can_place_at(snapped_pos, main.get_item())
+	if curr_item:
+		can_place = _can_place_at(snapped_pos, curr_item)
 	
-	if main.get_item() and main.get_item().buildable and !instantiated:
-		scene = main.get_item().scene.instantiate()
+	if curr_item and curr_item.buildable and !instantiated:
+		scene = curr_item.scene.instantiate()
 		world.add_child(scene)
 		instantiated = true
 	elif instantiated:
 		scene.global_position = snapped_pos
-	if (main.get_item() == null or !main.get_item().buildable) and scene:
+	if (curr_item == null or !curr_item.buildable) and scene:
 		scene.queue_free()
 		instantiated = false
 	
-	if Input.is_action_just_pressed("placed") and main.get_item() and main.get_item().buildable and can_place:
+	if Input.is_action_just_pressed("placed") and curr_item and curr_item.buildable and can_place:
 		place_item(snapped_pos)
 
 func _can_place_at(position: Vector2, item_data: ItemData) -> bool:
 	if item_data.item_name == "platform":
-		# Platforms can only go on empty ground
-		return not position in platforms
+		# Platforms can only go on empty ground and next to other platform
+		if position in platforms:
+			return false
+		
+		var tilesize = 16
+		var neighbors = [
+			position + Vector2(tilesize, 0), # right
+			position - Vector2(tilesize, 0), # left
+			position + Vector2(0, tilesize), # down
+			position - Vector2(0, tilesize) # up
+		]
+		
+		for n in neighbors:
+			if n in platforms:
+				return true
+		return false
 	else:
 		# Buildings need a platform underneath and no existing building
 		var has_platform = position in platforms
@@ -90,7 +122,7 @@ func _remove_top_layer(position: Vector2) -> void:
 		return
 	
 	# Then platforms (bottom layer)
-	if position in platforms:
+	if position in platforms and position not in core_four:
 		var platform_node = platforms[position]
 		var item_data = platform_node.item_data
 		platform_node.queue_free()
@@ -103,9 +135,13 @@ func _cancel_removal() -> void:
 
 func place_item(position: Vector2) -> void:
 	var item_data = main.get_item()
+	if not item_data:
+		return
+		
 	var new_scene = item_data.scene.instantiate()
 	new_scene.item_data = item_data
 	new_scene.global_position = position
+	new_scene.not_ghost = true
 	world.add_child(new_scene)
 	
 	# Add to correct dictionary

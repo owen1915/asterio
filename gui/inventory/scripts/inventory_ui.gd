@@ -34,10 +34,21 @@ func update_selected_slot(new_slot) -> void:
 
 func clear_inventory() -> void:
 	for c in get_children():
-		c.item_data = null # THIS IS THE FIX
+		c.item_data = null
 		c.get_node("TextureRect").texture = null
 		c.get_node("Label").text = ""
 		c.empty = true
+		
+func clear_slot() -> void:
+	var index = 1
+	for c in get_children():
+		if index == selected_slot:
+			c.item_data = null
+			c.get_node("TextureRect").texture = null
+			c.get_node("Label").text = ""
+			c.empty = true
+			return
+		index += 1
 
 func update_inventory(item_data, quantity) -> void:
 	for c in get_children():
