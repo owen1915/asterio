@@ -32,7 +32,8 @@ func kill() -> void:
 
 func take_damage(damage):
 	health -= damage
-	update_progress_bar()
+	if texture_progress_bar:
+		update_progress_bar()
 	if health <= 0:
 		kill()
 

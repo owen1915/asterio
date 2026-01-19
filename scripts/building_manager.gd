@@ -75,6 +75,9 @@ func _can_place_at(anchor_pos: Vector2, item_data: ItemData) -> bool:
 		if anchor_pos in platforms:
 			return false
 			
+		if _is_blocked_by_building(anchor_pos):
+			return false
+		
 		var offset = 16
 		var neighbors = [
 			anchor_pos + Vector2(offset, 0), # right
@@ -93,21 +96,68 @@ func _can_place_at(anchor_pos: Vector2, item_data: ItemData) -> bool:
 			var no_building = not anchor_pos in buildings
 			return has_platform and no_building
 		elif item_data.tile_size == 32:
-			var offset = 16
+			if item_data.item_name == "Thruster":
+				var offset = 16
+				var footprint = [
+					anchor_pos + Vector2(0, 0), # current tile
+					anchor_pos + Vector2(offset, 0), # right tile
+					anchor_pos + Vector2(0, offset), # bottom tile
+					anchor_pos + Vector2(offset, offset), # bottom right tile
+					anchor_pos + Vector2(0, -offset), # above tile
+					anchor_pos + Vector2(offset, -offset) # above right tile
+				]
+				
+				if footprint[4] in platforms and footprint[5] in platforms:
+					for i in range(4):
+						if footprint[i] in platforms or footprint[i] in buildings:
+							return false
+				else:
+					return false
+				return true
+			else:
+				var offset = 16
+				var footprint = [
+					anchor_pos + Vector2(0, 0), # current tile
+					anchor_pos + Vector2(offset, 0), # right tile
+					anchor_pos + Vector2(0, offset), # bottom tile
+					anchor_pos + Vector2(offset, offset) # bottom right tile
+				]
+				
+				for n in footprint:
+					if n not in platforms:
+						return false
+					if n in buildings:
+						return false
+				return true
+		return true
+
+func _is_blocked_by_building(check_pos: Vector2) -> bool:
+	var offset = 16
+	
+	# Check all buildings to see if check_pos is in their footprint
+	for building_anchor in buildings.keys():
+		var building = buildings[building_anchor]
+		
+		# Skip if not a valid building
+		if not building or not building.item_data:
+			continue
+		
+		# Check 2x2 buildings (like thrusters)
+		if building.item_data.tile_size == 32:
 			var footprint = [
-				anchor_pos + Vector2(0, 0), # current tile
-				anchor_pos + Vector2(offset, 0), # right tile
-				anchor_pos + Vector2(0, offset), # bottom tile
-				anchor_pos + Vector2(offset, offset) # bottom right tile
+				building_anchor + Vector2(0, 0),
+				building_anchor + Vector2(offset, 0),
+				building_anchor + Vector2(0, offset),
+				building_anchor + Vector2(offset, offset)
 			]
-			
-			for n in footprint:
-				if n not in platforms:
-					return false
-				if n in buildings:
-					return false
-			return true
-		return false
+			if check_pos in footprint:
+				return true
+		# 1x1 buildings
+		elif building.item_data.tile_size == 16:
+			if check_pos == building_anchor:
+				return true
+	
+	return false
 
 func _handle_removal(delta: float, snapped_pos: Vector2) -> void:
 	var has_something = _has_removable_at(snapped_pos)

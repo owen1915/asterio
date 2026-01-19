@@ -8,12 +8,14 @@ const SPACE_PLATFORM = preload("res://items/platform.tres")
 const SPIKE = preload("res://items/spike.tres")
 const CORE = preload("res://items/core.tres")
 const TURRET = preload("res://items/gun_turret.tres")
+const THRUSTER = preload("res://items/thruster.tres")
 
 func _ready() -> void:
 	inventory.add_item(SPACE_PLATFORM, 99)
 	inventory.add_item(SPIKE, 4)
 	inventory.add_item(CORE, 1)
 	inventory.add_item(TURRET, 10)
+	inventory.add_item(THRUSTER, 4)
 	super()
 	
 func _process(delta: float) -> void:

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dotlbbwl65r7x"]
+
+[ext_resource type="Texture2D" uid="uid://deksc7efgiq65" path="res://build/thruster/sprite/thruster.png" id="1_3e0uk"]
+[ext_resource type="Script" uid="uid://k1yyyuq2x7cs" path="res://build/thruster/thruster.gd" id="1_hn0lq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hn0lq"]
+radius = 13.0
+
+[node name="Thruster" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_hn0lq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3e0uk")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_hn0lq")
