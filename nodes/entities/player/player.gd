@@ -13,8 +13,9 @@ func _ready() -> void:
 	inventory.add_item(SPACE_PLATFORM, 99)
 	inventory.add_item(SPIKE, 4)
 	inventory.add_item(CORE, 1)
-	inventory.add_item(TURRET, 2)
-
+	inventory.add_item(TURRET, 10)
+	super()
+	
 func _process(delta: float) -> void:
 	pass
 	

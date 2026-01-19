@@ -8,8 +8,14 @@ var can_shoot = true
 var focused_asteroid = Asteroid
 var asteroid_queue : Array = []
 
+@onready var bullet_scene = preload("res://build/gun_turret/bullet/bullet.tscn")
+
+func _ready() -> void:
+	add_to_group("breakable")
+	super()
+
 func _process(delta: float) -> void:
-	if len(asteroid_queue) > 0:
+	if len(asteroid_queue) > 0 and not_ghost:
 		head.look_at(asteroid_queue[0].global_position)
 		head.rotation += PI / 2
 		if can_shoot:
@@ -18,15 +24,15 @@ func _process(delta: float) -> void:
 		 
 func reset_shoot() -> void:
 	can_shoot = false
-	await get_tree().create_timer(1 * shooting_factor)
+	await get_tree().create_timer(1 * shooting_factor).timeout
 	can_shoot = true
 
 func shoot_bullet() -> void:
-	if asteroid_queue[0].health - damage <= 0:
-		asteroid_queue[0].take_damage(damage)
-		asteroid_queue.remove_at(0)
-	else:
-		asteroid_queue[0].take_damage(damage)
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = head.global_position
+	bullet.target = asteroid_queue[0]
+	bullet.damage = damage
+	get_tree().root.add_child(bullet)
 
 func _on_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Asteroid"):

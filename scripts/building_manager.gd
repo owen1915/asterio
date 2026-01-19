@@ -39,7 +39,6 @@ func _process(delta: float) -> void:
 		if scene:
 			world.remove_child(scene)
 		curr_item = main.get_item()
-		print("reset")
 		instantiated = false
 		
 	var half = curr_item.tile_size / 2
@@ -104,6 +103,8 @@ func _can_place_at(anchor_pos: Vector2, item_data: ItemData) -> bool:
 			
 			for n in footprint:
 				if n not in platforms:
+					return false
+				if n in buildings:
 					return false
 			return true
 		return false

@@ -6,6 +6,7 @@ var damage = 20
 func _ready() -> void:
 	asteroid_manager = get_tree().get_first_node_in_group("asteroid_manager")
 	add_to_group("Asteroid")
+	super()
 
 func _physics_process(delta: float) -> void:
 	var dir = Vector2(0, 1)

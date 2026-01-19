@@ -6,9 +6,10 @@ class_name Entity
 
 # health
 @export var max_health := 100
-var health := max_health
+var health : int
 
 func _ready() -> void:
+	health = max_health
 	pass
 
 func _process(delta: float) -> void:

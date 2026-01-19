@@ -34,6 +34,6 @@ func spawn_asteroid() -> void:
 
 func start_spawn_timer() -> void:
 	#await get_tree().create_timer(randi_range(SPAWN_SPEED.x, SPAWN_SPEED.y) * spawn_factor).timeout
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(0.1).timeout
 	spawn_asteroid()
 	start_spawn_timer()

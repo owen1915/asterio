@@ -16,10 +16,17 @@ func _ready() -> void:
 
 func kill() -> void:
 	building_manager = get_tree().get_first_node_in_group("building_manager")
-	if global_position in building_manager.buildings:
-		building_manager.buildings.erase(global_position)
-	elif global_position in building_manager.platforms:
-		building_manager.platforms.erase(global_position)
+	
+	# Convert visual position back to anchor position
+	var grid = 16
+	var half = item_data.tile_size / 2
+	var anchor_pos = global_position - Vector2(half - grid / 2, half - grid / 2)
+	
+	# Remove from correct dictionary using anchor position
+	if anchor_pos in building_manager.buildings:
+		building_manager.buildings.erase(anchor_pos)
+	elif anchor_pos in building_manager.platforms:
+		building_manager.platforms.erase(anchor_pos)
 	
 	queue_free()
 
