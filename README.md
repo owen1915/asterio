@@ -2,8 +2,8 @@
 A 2D game made with Godot Engine. This game is about a lonely space engineer that must automate collection of recources
 whilst floating through space. Many challenges occur as the engineer floats through space, frequently meeting other
 astranauts, some good some bad, that might want something from him. The engineer must be prepared to deal with the bad
-and trade with the good. If the engineer doesn't meet quotas of resources every now and then, the evil CroakTech 
-will come and decide their fate. 
+and trade with the good. If the engineer doesn't meet quotas of resources and deliver these to CraokTech, the unverises big bad, every now and then,
+the evil CroakTech will come and decide their fate. 
 
 # implementation priorties
 1. **Basic player controls and basic map setup**
