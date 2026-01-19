@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0l0cts4lc7mw"]
+
+[ext_resource type="Script" uid="uid://bbb14ngvmtlnm" path="res://build/gun_turret/gun_turret.gd" id="1_75pfm"]
+[ext_resource type="Texture2D" uid="uid://c00uraucbtph" path="res://build/gun_turret/sprites/turret.png" id="2_ogbla"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75pfm"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogbla"]
+radius = 100.0
+
+[node name="Gunturret" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_75pfm")
+
+[node name="base" type="Sprite2D" parent="."]
+texture = ExtResource("2_ogbla")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="head" type="Sprite2D" parent="."]
+texture = ExtResource("2_ogbla")
+region_enabled = true
+region_rect = Rect2(32, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_75pfm")
+
+[node name="range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range"]
+shape = SubResource("CircleShape2D_ogbla")
+debug_color = Color(0.16756, 0.627264, 0.422787, 0.42)
+
+[connection signal="body_entered" from="range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="range" to="." method="_on_range_body_exited"]
