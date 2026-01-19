@@ -1,7 +1,7 @@
 extends Entity
 class_name Player
 
-@onready var jet: Sprite2D = $jet
+@onready var jet: Sprite2D = $new_flame
 @onready var inventory: Node = $Inventory
 
 const SPACE_PLATFORM = preload("res://items/platform.tres")

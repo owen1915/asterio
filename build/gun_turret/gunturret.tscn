@@ -39,10 +39,11 @@ shape = SubResource("CircleShape2D_ogbla")
 debug_color = Color(0.16756, 0.627264, 0.422787, 0.42)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -13.0
-offset_top = 13.0
-offset_right = 27.0
-offset_bottom = 53.0
+offset_left = -7.0
+offset_top = 8.0
+offset_right = 19.0
+offset_bottom = 31.0
+scale = Vector2(0.55, 0.55)
 value = 100.0
 texture_under = ExtResource("3_bt6mr")
 texture_progress = ExtResource("4_okael")

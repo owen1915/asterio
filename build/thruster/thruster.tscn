@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dotlbbwl65r7x"]
+[gd_scene load_steps=6 format=3 uid="uid://dotlbbwl65r7x"]
 
 [ext_resource type="Texture2D" uid="uid://deksc7efgiq65" path="res://build/thruster/sprite/thruster.png" id="1_3e0uk"]
 [ext_resource type="Script" uid="uid://k1yyyuq2x7cs" path="res://build/thruster/thruster.gd" id="1_hn0lq"]
+[ext_resource type="Texture2D" uid="uid://dtk7w2j65ukvo" path="res://gui/res/32x32_under.png" id="3_tb7vv"]
+[ext_resource type="Texture2D" uid="uid://dpc1yk6a421rt" path="res://gui/res/32x32_progress-export.png" id="4_ef0a1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hn0lq"]
 radius = 13.0
@@ -19,3 +21,15 @@ region_rect = Rect2(0, 0, 32, 32)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_hn0lq")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 33.0
+offset_bottom = 32.0
+scale = Vector2(0.55, 0.55)
+value = 50.0
+texture_under = ExtResource("3_tb7vv")
+texture_progress = ExtResource("4_ef0a1")
+texture_progress_offset = Vector2(1, 1)

@@ -19,10 +19,11 @@ build_mode = 1
 polygon = PackedVector2Array(-14, -14, -10, -14, -10, -13, -4, -13, -4, -12, 4, -12, 4, -13, 10, -13, 10, -14, 14, -14, 14, -9, 13, -9, 13, -3, 12, -3, 12, 3, 13, 3, 13, 9, 14, 9, 14, 14, 10, 14, 10, 13, 4, 13, 4, 12, -4, 12, -4, 13, -10, 13, -10, 14, -14, 14, -14, 9, -13, 9, -13, 3, -12, 3, -12, -3, -13, -3, -13, -9, -14, -9)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -13.0
-offset_top = 15.0
-offset_right = 27.0
-offset_bottom = 55.0
+offset_left = -7.0
+offset_top = 11.0
+offset_right = 33.0
+offset_bottom = 51.0
+scale = Vector2(0.55, 0.55)
 value = 100.0
 rounded = true
 texture_under = ExtResource("3_iaers")
