@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bcd34wh6yo0te"]
+[gd_scene load_steps=14 format=4 uid="uid://bcd34wh6yo0te"]
 
 [ext_resource type="Script" uid="uid://bc6i7pw86q7h3" path="res://scripts/game.gd" id="1_bxlbv"]
 [ext_resource type="PackedScene" uid="uid://b2hndxdakfm2t" path="res://nodes/background/background.tscn" id="1_irdys"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bx4yo2udbfeyf" path="res://gui/res/circle_under.png" id="6_paj5s"]
 [ext_resource type="Texture2D" uid="uid://dgo5m58bow8v2" path="res://gui/res/circle_texture-export.png" id="7_paj5s"]
 [ext_resource type="Script" uid="uid://daokglv1voyrn" path="res://nodes/main/asteroid_manager.gd" id="10_js3a2"]
+[ext_resource type="Script" uid="uid://bqcot0q27ntlk" path="res://nodes/main/speed_manager.gd" id="11_17jxn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_woli3"]
 texture = ExtResource("3_jeic7")
@@ -65,7 +66,7 @@ texture = ExtResource("3_jeic7")
 [sub_resource type="TileSet" id="TileSet_js3a2"]
 sources/0 = SubResource("TileSetAtlasSource_woli3")
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" groups=["main"]]
 script = ExtResource("1_bxlbv")
 
 [node name="Background" parent="." instance=ExtResource("1_irdys")]
@@ -110,3 +111,28 @@ texture_progress = ExtResource("7_paj5s")
 
 [node name="AsteroidManager" type="Node2D" parent="." groups=["asteroid_manager"]]
 script = ExtResource("10_js3a2")
+
+[node name="SpeedManager" type="Node2D" parent="."]
+script = ExtResource("11_17jxn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_right = 194.0
+offset_bottom = 50.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 147.0
+offset_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Speed: 300m/s"
+
+[node name="DistanceLabel" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Distance Travelled: 0m"

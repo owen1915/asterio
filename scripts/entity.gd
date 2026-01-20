@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Entity
 
 # speed
-@export var speed := 100
+@export var speed := 100.0
 
 # health
 @export var max_health := 100

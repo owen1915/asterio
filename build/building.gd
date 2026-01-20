@@ -7,7 +7,10 @@ var health
 @onready var building_manager = null
 @onready var texture_progress_bar: TextureProgressBar = $TextureProgressBar
 
+@onready var main
+
 func _ready() -> void:
+	main = get_tree().get_first_node_in_group("main")
 	health = max_health
 	if texture_progress_bar:
 		texture_progress_bar.max_value = max_health
@@ -25,8 +28,11 @@ func kill() -> void:
 	# Remove from correct dictionary using anchor position
 	if anchor_pos in building_manager.buildings:
 		building_manager.buildings.erase(anchor_pos)
+		if item_data.item_name == "thruster":
+			building_manager.thrusters.erase(anchor_pos)
 	elif anchor_pos in building_manager.platforms:
 		building_manager.platforms.erase(anchor_pos)
+	
 	
 	queue_free()
 

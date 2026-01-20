@@ -10,7 +10,7 @@ region = Rect2(128, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_56yru")
-item_name = "Thruster"
+item_name = "thruster"
 description = "Thrusts you through space"
 texture = SubResource("AtlasTexture_wcjlv")
 max_stack = 99

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0l0cts4lc7mw"]
+[gd_scene load_steps=8 format=3 uid="uid://c0l0cts4lc7mw"]
 
 [ext_resource type="Script" uid="uid://bbb14ngvmtlnm" path="res://build/gun_turret/gun_turret.gd" id="1_75pfm"]
 [ext_resource type="Texture2D" uid="uid://c00uraucbtph" path="res://build/gun_turret/sprites/turret.png" id="2_ogbla"]
 [ext_resource type="Texture2D" uid="uid://dtk7w2j65ukvo" path="res://gui/res/32x32_under.png" id="3_bt6mr"]
+[ext_resource type="Texture2D" uid="uid://bnsgwi446y8dv" path="res://build/gun_turret/sprites/turret_range.png" id="3_okael"]
 [ext_resource type="Texture2D" uid="uid://dpc1yk6a421rt" path="res://gui/res/32x32_progress-export.png" id="4_okael"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75pfm"]
@@ -35,8 +36,14 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="range"]
+visible = false
 shape = SubResource("CircleShape2D_ogbla")
 debug_color = Color(0.16756, 0.627264, 0.422787, 0.42)
+
+[node name="range" type="Sprite2D" parent="range"]
+visible = false
+scale = Vector2(12, 12)
+texture = ExtResource("3_okael")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 offset_left = -7.0

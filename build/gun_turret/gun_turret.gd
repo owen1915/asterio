@@ -1,6 +1,8 @@
 extends Building
 
 @onready var head: Sprite2D = $head
+@onready var range: Sprite2D = $range/range
+
 var damage = 20
 var shooting_factor = 1
 var can_shoot = true
@@ -21,7 +23,12 @@ func _process(delta: float) -> void:
 		if can_shoot:
 			shoot_bullet()
 			reset_shoot()
-		 
+			
+	if main.turret_range:
+		range.visible = true
+	else:
+		range.visible = false
+
 func reset_shoot() -> void:
 	can_shoot = false
 	await get_tree().create_timer(1 * shooting_factor).timeout

@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	velocity = dir.normalized() * speed
 	if velocity != Vector2.ZERO:
 		var target_angle = velocity.angle() + (PI / 2)
-		rotation = lerp_angle(rotation, target_angle, 0.2)
+		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
 		jet.visible = true
 	else:
 		jet.visible = false

@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 
 func update_selected_slot(new_slot) -> void:
 	if new_slot == selected_slot:
-		return
+		new_slot = 0
 	
 	var index = 1
 	for c in get_children():

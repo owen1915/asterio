@@ -11,6 +11,7 @@ var curr_item = null
 # Separate layers
 var platforms = {}   # Vector2 -> Node
 var buildings = {}   # Vector2 -> Node
+var thrusters = {}
 var core_four = {}
 
 # Removal state
@@ -93,7 +94,7 @@ func _can_place_at(anchor_pos: Vector2, item_data: ItemData) -> bool:
 		if item_data.tile_size == 16:
 			return anchor_pos in platforms
 		elif item_data.tile_size == 32:
-			if item_data.item_name == "Thruster":
+			if item_data.item_name == "thruster":
 				var offset = 16
 				var footprint = [
 					anchor_pos + Vector2(0, 0), # current tile
@@ -178,6 +179,8 @@ func _has_removable_at(position: Vector2) -> bool:
 func _remove_top_layer(position: Vector2) -> void:
 	# Buildings get removed first (top layer)
 	if position in buildings:
+		if position in thrusters:
+			thrusters.erase(position)
 		var building_node = buildings[position]
 		var item_data = building_node.item_data
 		building_node.queue_free()
@@ -216,6 +219,9 @@ func place_item(position: Vector2) -> void:
 		platforms[position] = new_scene
 	else:
 		buildings[position] = new_scene
+		
+	if item_data.item_name == "thruster":
+		thrusters[position] = new_scene
 	
 	main.player.inventory.remove_item(item_data, 1)
 
@@ -264,7 +270,7 @@ func _has_building_on_platform(platform_pos: Vector2) -> bool:
 		var building_footprint = []
 		
 		# Get footprint based on building type
-		if building.item_data.item_name == "Thruster":
+		if building.item_data.item_name == "thruster":
 			# Thruster needs the 2 platforms directly above it
 			building_footprint = [
 				building_anchor + Vector2(0, -offset),      # above-left
