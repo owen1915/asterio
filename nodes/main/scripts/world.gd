@@ -39,6 +39,7 @@ func _ready() -> void:
 	var core = CORE.instantiate()
 	core.item_data = preload("res://items/core.tres")
 	core.global_position = pos1 + Vector2(8, 8)
+	core.not_ghost = true
 	add_child(core)
 	building_manager.buildings[pos1] = core
 	

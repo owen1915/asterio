@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://be6pt2ax4w0wt"]
+[gd_scene load_steps=3 format=3 uid="uid://be6pt2ax4w0wt"]
 
+[ext_resource type="StyleBox" uid="uid://c12td8piraoj3" path="res://gui/buttons/transparent_button.tres" id="1_0scpu"]
 [ext_resource type="Script" uid="uid://iduvd2qapjeg" path="res://gui/inventory/inventory_slot.gd" id="1_76hyd"]
 
 [node name="InventorySlot" type="Button"]
 custom_minimum_size = Vector2(32, 32)
+theme_override_styles/focus = ExtResource("1_0scpu")
 toggle_mode = true
 script = ExtResource("1_76hyd")
 
