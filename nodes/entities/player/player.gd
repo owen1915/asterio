@@ -11,6 +11,8 @@ const TURRET = preload("res://items/gun_turret.tres")
 const THRUSTER = preload("res://items/thruster.tres")
 const CLAW = preload("res://items/claw.tres")
 const CRATE = preload("res://items/crate.tres")
+const FURNACE = preload("res://items/furnace.tres")
+const INSERTER = preload("res://items/inserter.tres")
 
 func _ready() -> void:
 	inventory.add_item(SPACE_PLATFORM, 99)
@@ -20,6 +22,8 @@ func _ready() -> void:
 	inventory.add_item(THRUSTER, 99)
 	inventory.add_item(CLAW, 99)
 	inventory.add_item(SPIKE, 99)
+	inventory.add_item(FURNACE, 99)
+	inventory.add_item(INSERTER, 99)
 	super()
 	
 func _process(delta: float) -> void:

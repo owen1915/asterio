@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://3yl1xm7kdsp4"]
+
+[ext_resource type="Texture2D" uid="uid://dni3ecg5rs5sx" path="res://build/inserter/sprites/inserter.png" id="1_31rth"]
+[ext_resource type="Script" uid="uid://dqu3y3m317cci" path="res://build/inserter/inserter.gd" id="1_a74ec"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a74ec"]
+atlas = ExtResource("1_31rth")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a74ec"]
+size = Vector2(8, 8)
+
+[node name="Inserter" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_a74ec")
+max_health = 20
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_31rth")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Head" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_a74ec")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a74ec")

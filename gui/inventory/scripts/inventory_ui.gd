@@ -20,6 +20,10 @@ func _process(delta: float) -> void:
 		update_selected_slot(4)
 	elif Input.is_action_just_pressed("5"):
 		update_selected_slot(5)
+	
+	if Input.is_action_just_pressed("hotbar_swap"):
+		for i in range(5):
+			move_child(get_child(0), -1)
 
 func update_selected_slot(new_slot) -> void:
 	if new_slot == selected_slot:
