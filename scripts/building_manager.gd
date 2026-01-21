@@ -224,6 +224,9 @@ func place_item(position: Vector2) -> void:
 	if item_data.item_name == "thruster":
 		thrusters[position] = new_scene
 	
+	if item_data.item_name == "claw":
+		new_scene.starting_pos = new_scene.global_position
+	
 	main.player.inventory.remove_item(item_data, 1)
 
 func _can_remove_at(position: Vector2) -> bool:

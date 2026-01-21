@@ -6,6 +6,7 @@ var og_speed = 0.0
 var rotation_speed = 0.0
 @onready var sprite: Sprite2D = $Sprite2D
 
+const IRON = preload("res://nodes/entities/ore/iron/iron.tscn")
 func _ready() -> void:
 	asteroid_manager = get_tree().get_first_node_in_group("asteroid_manager")
 	add_to_group("Asteroid")
@@ -25,6 +26,11 @@ func _physics_process(delta: float) -> void:
 func take_damage(damage) -> void:
 	health -= damage
 	if health <= 0:
+		var ore = IRON.instantiate()
+		ore.global_position = global_position
+		ore.velocity = velocity
+		get_parent().add_child(ore)
+		
 		asteroid_manager.asteroids_alive -= 1
 		queue_free()
 

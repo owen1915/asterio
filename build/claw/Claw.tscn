@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxb1c0yq2k24n"]
+
+[ext_resource type="Script" uid="uid://cow0buwf5n1ri" path="res://build/claw/claw.gd" id="1_ykewh"]
+[ext_resource type="Texture2D" uid="uid://dt41r4wrdm6q7" path="res://build/claw/sprites/claw_and_ores.png" id="2_hbkq1"]
+[ext_resource type="Texture2D" uid="uid://bnsgwi446y8dv" path="res://build/gun_turret/sprites/turret_range.png" id="3_26nob"]
+[ext_resource type="Script" uid="uid://bofncashop20f" path="res://build/claw/claw_entity.gd" id="3_uu3n5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edvkd"]
+size = Vector2(8, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uu3n5"]
+size = Vector2(8, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26nob"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbkq1"]
+radius = 100.0
+
+[node name="Claw" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_ykewh")
+
+[node name="body" type="Sprite2D" parent="."]
+texture = ExtResource("2_hbkq1")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)
+
+[node name="claw" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_uu3n5")
+speed = 500.0
+
+[node name="claw_area" type="Area2D" parent="claw"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="claw/claw_area"]
+shape = SubResource("RectangleShape2D_edvkd")
+
+[node name="Sprite2D" type="Sprite2D" parent="claw"]
+texture = ExtResource("2_hbkq1")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="claw"]
+shape = SubResource("RectangleShape2D_uu3n5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_26nob")
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+visible = false
+shape = SubResource("CircleShape2D_hbkq1")
+
+[node name="range" type="Sprite2D" parent="Range"]
+visible = false
+scale = Vector2(12, 12)
+texture = ExtResource("3_26nob")
+
+[connection signal="body_entered" from="claw/claw_area" to="." method="_on_claw_area_body_entered"]
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
