@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjgnuu02aslo2"]
+
+[ext_resource type="Script" uid="uid://bbgcmcq8avmyp" path="res://build/crate/crate.gd" id="1_k67ao"]
+[ext_resource type="Texture2D" uid="uid://7udb51gc0i0" path="res://build/claw/sprites/crate.png" id="2_8v36k"]
+[ext_resource type="FontFile" uid="uid://de30uc03cv6qg" path="res://fonts/8bitOperatorPlus-Bold.ttf" id="3_qmykv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmykv"]
+size = Vector2(14, 14)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qmykv"]
+font = ExtResource("3_qmykv")
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Crate" type="StaticBody2D"]
+collision_layer = 10
+collision_mask = 0
+script = ExtResource("1_k67ao")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8v36k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qmykv")
+
+[node name="claw_to" type="Marker2D" parent="."]
+
+[node name="StoredTexture" type="TextureRect" parent="."]
+offset_left = -10.0
+offset_top = -9.0
+offset_right = 32.0
+offset_bottom = 33.0
+scale = Vector2(0.5, 0.5)
+
+[node name="QuantityLabel" type="Label" parent="."]
+offset_left = 3.0
+offset_top = -8.0
+offset_right = 16.0
+offset_bottom = 15.0
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_qmykv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_qmykv")

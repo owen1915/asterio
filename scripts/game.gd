@@ -10,6 +10,7 @@ var item_selected : ItemData
 @onready var distance_label: Label = $CanvasLayer/Panel/MarginContainer/VBoxContainer/DistanceLabel
 @onready var asteroids_per_sec: Label = $CanvasLayer/Panel/MarginContainer/VBoxContainer/AsteroidsPerSec
 @onready var asteroid_manager: Node2D = $AsteroidManager
+@onready var world: Node2D = $World
 
 var distance_traveled := 0.0
 var turret_range = false

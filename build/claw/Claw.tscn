@@ -21,21 +21,28 @@ radius = 100.0
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_ykewh")
+max_health = 20
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_hbkq1")
 region_enabled = true
 region_rect = Rect2(16, 0, 16, 16)
 
+[node name="base_anchor" type="Marker2D" parent="body"]
+
+[node name="line" type="Line2D" parent="."]
+width = 2.0
+
 [node name="claw" type="CharacterBody2D" parent="."]
-collision_layer = 0
+collision_layer = 16
 collision_mask = 0
 script = ExtResource("3_uu3n5")
-speed = 500.0
+speed = 300.0
+max_health = 100000
 
 [node name="claw_area" type="Area2D" parent="claw"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="claw/claw_area"]
 shape = SubResource("RectangleShape2D_edvkd")
@@ -45,6 +52,9 @@ texture = ExtResource("2_hbkq1")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
+[node name="claw_anchor" type="Marker2D" parent="claw/Sprite2D"]
+position = Vector2(0, 3)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="claw"]
 shape = SubResource("RectangleShape2D_uu3n5")
 
@@ -53,7 +63,7 @@ shape = SubResource("RectangleShape2D_26nob")
 
 [node name="Range" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 visible = false

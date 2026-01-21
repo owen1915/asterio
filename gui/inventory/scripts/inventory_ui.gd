@@ -4,6 +4,8 @@ extends Control
 var slot = preload("res://gui/inventory/InventorySlot.tscn")
 var selected_slot = -1
 
+var swap = null
+
 func _ready() -> void:
 	pass
 
@@ -21,14 +23,19 @@ func _process(delta: float) -> void:
 
 func update_selected_slot(new_slot) -> void:
 	if new_slot == selected_slot:
+		var index = 1
+		for c in get_children():
+			if index == new_slot:
+				c.release_focus()
+				break
+			index += 1
 		new_slot = 0
 	
 	var index = 1
 	for c in get_children():
 		if index == new_slot:
-			c.button_pressed = true
-		if index == selected_slot:
-			c.button_pressed = false
+			c.grab_focus()
+			break
 		index += 1
 	selected_slot = new_slot
 

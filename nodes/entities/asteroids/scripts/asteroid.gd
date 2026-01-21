@@ -1,7 +1,7 @@
 class_name Asteroid extends Entity
 
 var asteroid_manager = null
-var damage = 20
+@export var damage = 20
 var og_speed = 0.0
 var rotation_speed = 0.0
 @onready var sprite: Sprite2D = $Sprite2D
