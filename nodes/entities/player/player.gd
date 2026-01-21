@@ -15,7 +15,7 @@ func _ready() -> void:
 	inventory.add_item(SPIKE, 4)
 	#inventory.add_item(CORE, 1)
 	inventory.add_item(TURRET, 10)
-	inventory.add_item(THRUSTER, 4)
+	inventory.add_item(THRUSTER, 9)
 	super()
 	
 func _process(delta: float) -> void:

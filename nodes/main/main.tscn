@@ -136,3 +136,7 @@ text = "Speed: 300m/s"
 [node name="DistanceLabel" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Distance Travelled: 0m"
+
+[node name="AsteroidsPerSec" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Asteroids/Sec: 0."

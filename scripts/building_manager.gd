@@ -183,6 +183,7 @@ func _remove_top_layer(position: Vector2) -> void:
 			thrusters.erase(position)
 		var building_node = buildings[position]
 		var item_data = building_node.item_data
+		building_node.remove()
 		building_node.queue_free()
 		buildings.erase(position)
 		main.player.inventory.add_item(item_data, 1)

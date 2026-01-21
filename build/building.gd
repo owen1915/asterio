@@ -17,6 +17,9 @@ func _ready() -> void:
 		texture_progress_bar.value = health
 		texture_progress_bar.visible = false
 
+func remove() -> void:
+	pass
+
 func kill() -> void:
 	building_manager = get_tree().get_first_node_in_group("building_manager")
 	

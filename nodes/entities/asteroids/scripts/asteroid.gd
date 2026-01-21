@@ -4,6 +4,7 @@ var asteroid_manager = null
 var damage = 20
 var og_speed = 0.0
 var rotation_speed = 0.0
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	asteroid_manager = get_tree().get_first_node_in_group("asteroid_manager")
