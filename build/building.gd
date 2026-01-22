@@ -11,6 +11,7 @@ var health
 
 func _ready() -> void:
 	main = get_tree().get_first_node_in_group("main")
+	building_manager = main.building_manager
 	health = max_health
 	if texture_progress_bar:
 		texture_progress_bar.max_value = max_health
@@ -21,8 +22,6 @@ func remove() -> void:
 	pass
 
 func kill() -> void:
-	building_manager = get_tree().get_first_node_in_group("building_manager")
-	
 	# Convert visual position back to anchor position
 	var grid = 16
 	var half = item_data.tile_size / 2

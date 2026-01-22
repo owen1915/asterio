@@ -8,3 +8,4 @@ extends Resource
 @export var buildable = false
 @export var scene: PackedScene
 @export var tile_size: int = 16
+@export var processed : ItemData

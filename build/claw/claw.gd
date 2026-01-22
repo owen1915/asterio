@@ -151,7 +151,7 @@ func _release_current_ore() -> void:
 
 func _deliver_ore() -> void:
 	var ore_to_free = current_ore
-	closest_crate.add_to_storage(current_ore.item_data)
+	closest_crate.add_item(current_ore.item_data)
 	_release_current_ore()
 	if _is_ore_valid(ore_to_free):
 		ore_to_free.queue_free()

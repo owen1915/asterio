@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://co05va4jbr5tu"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://co05va4jbr5tu"]
 
+[ext_resource type="Resource" uid="uid://d31lp7gdnog66" path="res://items/iron_smelted.tres" id="1_7njfq"]
 [ext_resource type="PackedScene" uid="uid://cvfr5rswuvk8m" path="res://nodes/entities/ore/iron/iron.tscn" id="1_s8rhg"]
 [ext_resource type="Script" uid="uid://cfni3sbrritcn" path="res://items/scripts/item_data.gd" id="1_vhq3y"]
 [ext_resource type="Texture2D" uid="uid://dt41r4wrdm6q7" path="res://build/claw/sprites/claw_and_ores.png" id="3_8biea"]
@@ -17,4 +18,5 @@ max_stack = 99
 buildable = false
 scene = ExtResource("1_s8rhg")
 tile_size = 16
+processed = ExtResource("1_7njfq")
 metadata/_custom_type_script = "uid://cfni3sbrritcn"
