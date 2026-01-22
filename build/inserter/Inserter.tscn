@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://3yl1xm7kdsp4"]
+
+[ext_resource type="Texture2D" uid="uid://dni3ecg5rs5sx" path="res://build/inserter/sprites/inserter.png" id="1_31rth"]
+[ext_resource type="Script" uid="uid://dqu3y3m317cci" path="res://build/inserter/inserter.gd" id="1_a74ec"]
+[ext_resource type="Script" uid="uid://bprki6qxolcec" path="res://build/inserter/inserter_head.gd" id="3_6jb1h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a74ec"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a74ec"]
+atlas = ExtResource("1_31rth")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jb1h"]
+size = Vector2(6, 3)
+
+[node name="Inserter" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_a74ec")
+max_health = 20
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_31rth")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a74ec")
+
+[node name="InserterHead" type="CharacterBody2D" parent="."]
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_6jb1h")
+
+[node name="Head" type="Sprite2D" parent="InserterHead"]
+texture = SubResource("AtlasTexture_a74ec")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InserterHead"]
+visible = false
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_6jb1h")
+
+[node name="Detect" type="Area2D" parent="InserterHead"]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InserterHead/Detect"]
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_6jb1h")
+
+[node name="resource" type="Marker2D" parent="InserterHead"]
+position = Vector2(0, -10)
+
+[node name="resource_texture" type="TextureRect" parent="InserterHead/resource"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -18,6 +18,14 @@ func _process(delta: float) -> void:
 		sprite.play("start_up")
 		
 
+func kill() -> void:
+	speed_manager.remove_speed(additional_speed)
+	super()
+	
+func remove() -> void:
+	speed_manager.remove_speed(additional_speed)
+	super()
+
 func _on_sprite_animation_finished() -> void:
 	if sprite.animation == "start_up":
 		sprite.play("full_speed")

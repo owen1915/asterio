@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://yajdowowcg5x"]
+
+[ext_resource type="FontFile" uid="uid://de30uc03cv6qg" path="res://fonts/8bitOperatorPlus-Bold.ttf" id="1_ljexp"]
+
+[resource]
+font = ExtResource("1_ljexp")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)

@@ -3,7 +3,7 @@ extends Node2D
 @onready var world: Node2D = $"../World"
 @onready var speed_manager: Node2D = $"../SpeedManager"
 
-var spawn_factor = 1.0
+var spawn_factor = 1
 const SPAWN_SPEED = Vector2(1, 1)
 
 var speed_factor = 1.0
@@ -17,16 +17,30 @@ var spawn_range_max = Vector2(1400, 100)
 
 var asteroid_scene = preload("res://nodes/entities/asteroids/asteroid.tscn")
 
+var easy = {
+	"texture" : preload("res://nodes/entities/asteroids/sprites/asteroid_1-export.png"),
+	"health" : 20
+}
+
+var medium = {
+	"texture" : preload("res://nodes/entities/asteroids/sprites/asteroid_2.png"),
+	"health" : 40
+}
+
+var hard = {
+	"texture" : preload("res://nodes/entities/asteroids/sprites/hard.png"),
+	"health" : 60
+}
+
+func _ready() -> void:
+	start_spawn_timer()
+
 func update_asteroid_stats() -> void:
-	speed_factor = (speed_manager.speed / 10) + 1.0 # every 100m/s adds 0.1 to factor
-	spawn_factor = max(0.5, 1.0 - (speed_manager.speed / 50))
+	speed_factor = 1.0 + pow(speed_manager.speed, 0.6) * 0.18
+	spawn_factor = clamp(1.0 / (1.0 + pow(speed_manager.speed, 0.9) * 0.08), 0.25, 1.0)
 	for child in world.get_children():
 		if child is Asteroid:
 			child.speed = child.og_speed * speed_factor
-
-func _ready() -> void:
-	spawn_asteroid()
-	start_spawn_timer()
 
 func spawn_asteroid() -> void:
 	var asteroid = asteroid_scene.instantiate()
@@ -40,8 +54,20 @@ func spawn_asteroid() -> void:
 	asteroid.global_position = Vector2(spawn_x, spawn_y)
 	world.add_child(asteroid)
 	asteroids_alive += 1
+	
+	var difficulty = randf()
+	if difficulty <= 0.5:
+		asteroid.health = easy["health"]
+		asteroid.sprite.texture = easy["texture"]
+	elif difficulty <= 0.85:
+		asteroid.health = medium["health"]
+		asteroid.sprite.texture = medium["texture"]
+	else:
+		asteroid.health = hard["health"]
+		asteroid.sprite.texture = hard["texture"]
 
 func start_spawn_timer() -> void:
-	await get_tree().create_timer(randi_range(SPAWN_SPEED.x, SPAWN_SPEED.y) * spawn_factor).timeout
+	var random = randi_range(SPAWN_SPEED.x, SPAWN_SPEED.y)
+	await get_tree().create_timer(random * spawn_factor).timeout
 	spawn_asteroid()
 	start_spawn_timer()

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvfr5rswuvk8m"]
+
+[ext_resource type="Script" uid="uid://dansjdwsgxndk" path="res://nodes/entities/ore/iron/iron.gd" id="1_86i88"]
+[ext_resource type="Texture2D" uid="uid://dt41r4wrdm6q7" path="res://build/claw/sprites/claw_and_ores.png" id="2_0qhhc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drut3"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0qhhc"]
+radius = 5.0
+
+[node name="Iron" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_86i88")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0qhhc")
+region_enabled = true
+region_rect = Rect2(0, 16, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_drut3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 282
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0qhhc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

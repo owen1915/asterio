@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://c1tlm4f4aagrn"]
+
+[ext_resource type="Script" uid="uid://cfni3sbrritcn" path="res://items/scripts/item_data.gd" id="1_1tymj"]
+[ext_resource type="PackedScene" uid="uid://c408jlaqi02sb" path="res://build/furnace/furnace.tscn" id="1_wdxn5"]
+[ext_resource type="Texture2D" uid="uid://bvkxlq1a3rk87" path="res://build/furnace/sprites/furnace.png" id="3_4npt8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vje2c"]
+atlas = ExtResource("3_4npt8")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_1tymj")
+item_name = "Furnace"
+description = "Process your gathered resources here."
+texture = SubResource("AtlasTexture_vje2c")
+max_stack = 99
+buildable = true
+scene = ExtResource("1_wdxn5")
+tile_size = 16
+metadata/_custom_type_script = "uid://cfni3sbrritcn"

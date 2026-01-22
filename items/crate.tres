@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://d0lp74fnjtct3"]
+
+[ext_resource type="PackedScene" uid="uid://bjgnuu02aslo2" path="res://build/crate/crate.tscn" id="1_6ok3b"]
+[ext_resource type="Script" uid="uid://cfni3sbrritcn" path="res://items/scripts/item_data.gd" id="1_uv06e"]
+[ext_resource type="Texture2D" uid="uid://7udb51gc0i0" path="res://build/claw/sprites/crate.png" id="3_6sg7u"]
+
+[resource]
+script = ExtResource("1_uv06e")
+item_name = "Crate"
+description = "Store items here"
+texture = ExtResource("3_6sg7u")
+max_stack = 99
+buildable = true
+scene = ExtResource("1_6ok3b")
+tile_size = 16
+metadata/_custom_type_script = "uid://cfni3sbrritcn"

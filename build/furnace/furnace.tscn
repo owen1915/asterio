@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://c408jlaqi02sb"]
+
+[ext_resource type="Script" uid="uid://dh2cqg5d87owb" path="res://build/furnace/furnace.gd" id="1_8av53"]
+[ext_resource type="Texture2D" uid="uid://bvkxlq1a3rk87" path="res://build/furnace/sprites/furnace.png" id="2_ukrlt"]
+[ext_resource type="FontFile" uid="uid://de30uc03cv6qg" path="res://fonts/8bitOperatorPlus-Bold.ttf" id="3_1qbvr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qbvr"]
+atlas = ExtResource("2_ukrlt")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2qn6"]
+atlas = ExtResource("2_ukrlt")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty1de"]
+atlas = ExtResource("2_ukrlt")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpdpu"]
+atlas = ExtResource("2_ukrlt")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3jav"]
+atlas = ExtResource("2_ukrlt")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ut5n2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qbvr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2qn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty1de")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpdpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3jav")
+}],
+"loop": true,
+"name": &"processing",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xsco"]
+size = Vector2(14, 14)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1qbvr"]
+font = ExtResource("3_1qbvr")
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Furnace" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_8av53")
+max_health = 40
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ut5n2")
+animation = &"processing"
+autoplay = "idle"
+frame_progress = 0.160258
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_0xsco")
+
+[node name="StoredTexture" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuantityLabel" type="Label" parent="StoredTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -5.0
+offset_right = 15.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+label_settings = SubResource("LabelSettings_1qbvr")

@@ -2,6 +2,7 @@ extends Building
 @onready var ship_menu: Panel = $CanvasLayer/ShipMenu
 
 var start = true
+@onready var s: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
 	add_to_group("breakable")
@@ -15,4 +16,9 @@ func _on_button_pressed() -> void:
 	if len(main.building_manager.thrusters) == 0:
 		return
 	main.speed_manager.engines(start)
+	if start:
+		s.play("running")
+	else:
+		s.play("idle")
 	start = !start
+	

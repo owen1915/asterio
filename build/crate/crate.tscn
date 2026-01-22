@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjgnuu02aslo2"]
+
+[ext_resource type="Script" uid="uid://bbgcmcq8avmyp" path="res://build/crate/crate.gd" id="1_k67ao"]
+[ext_resource type="Texture2D" uid="uid://7udb51gc0i0" path="res://build/claw/sprites/crate.png" id="2_8v36k"]
+[ext_resource type="FontFile" uid="uid://de30uc03cv6qg" path="res://fonts/8bitOperatorPlus-Bold.ttf" id="3_qmykv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmykv"]
+size = Vector2(14, 14)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qmykv"]
+font = ExtResource("3_qmykv")
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Crate" type="StaticBody2D"]
+collision_layer = 10
+collision_mask = 0
+script = ExtResource("1_k67ao")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8v36k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qmykv")
+
+[node name="claw_to" type="Marker2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_qmykv")
+
+[node name="StoredTexture" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuantityLabel" type="Label" parent="StoredTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -5.0
+offset_right = 15.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+label_settings = SubResource("LabelSettings_qmykv")

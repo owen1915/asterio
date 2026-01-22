@@ -1,4 +1,4 @@
-extends Node2D
+class_name BuildingManager extends Node2D
 
 @onready var main: Game = $".."
 @onready var world: Node2D = $"../World"
@@ -183,6 +183,7 @@ func _remove_top_layer(position: Vector2) -> void:
 			thrusters.erase(position)
 		var building_node = buildings[position]
 		var item_data = building_node.item_data
+		building_node.remove()
 		building_node.queue_free()
 		buildings.erase(position)
 		main.player.inventory.add_item(item_data, 1)
@@ -222,6 +223,9 @@ func place_item(position: Vector2) -> void:
 		
 	if item_data.item_name == "thruster":
 		thrusters[position] = new_scene
+	
+	if item_data.item_name == "claw":
+		new_scene.starting_pos = new_scene.global_position
 	
 	main.player.inventory.remove_item(item_data, 1)
 
@@ -358,3 +362,35 @@ func _is_connected_to_core(start_pos: Vector2, platform_dict: Dictionary) -> boo
 				to_check.append(neighbor)
 	
 	return false
+
+func has_building_at(check_pos: Vector2) -> Building:
+	# Direct anchor check
+	if check_pos in buildings:
+		return buildings[check_pos]
+	
+	# Check if position is within a 2x2 building's footprint
+	var offset = 16
+	for building_anchor in buildings.keys():
+		var building = buildings[building_anchor]
+		if not building or not building.item_data:
+			continue
+		
+		if building.item_data.tile_size == 32:
+			var footprint = [
+				building_anchor,
+				building_anchor + Vector2(offset, 0),
+				building_anchor + Vector2(0, offset),
+				building_anchor + Vector2(offset, offset)
+			]
+			if check_pos in footprint:
+				return building
+	
+	return null
+
+func anchor_to_visual(anchor_pos: Vector2, tile_size: int) -> Vector2:
+	var offset = tile_size / 2 - grid / 2
+	return anchor_pos + Vector2(offset, offset)
+
+func visual_to_anchor(visual_pos: Vector2, tile_size: int) -> Vector2:
+	var offset = tile_size / 2 - grid / 2
+	return visual_pos - Vector2(offset, offset)
