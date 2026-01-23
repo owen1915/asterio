@@ -9,3 +9,4 @@ extends Resource
 @export var scene: PackedScene
 @export var tile_size: int = 16
 @export var processed : ItemData
+@export var is_rotatable: bool = false

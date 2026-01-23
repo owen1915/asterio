@@ -7,6 +7,7 @@ var scene: Node
 var instantiated = false
 var can_place = true
 var curr_item = null
+var preview_rotation = 0
 
 # Separate layers
 var platforms = {}   # Vector2 -> Node
@@ -29,6 +30,10 @@ func _process(delta: float) -> void:
 	var anchor_x = floor(mouse_pos.x / grid) * grid + grid / 2
 	var anchor_y = floor(mouse_pos.y / grid) * grid + grid / 2
 	var anchor_pos = Vector2(anchor_x, anchor_y)
+	
+	if Input.is_action_just_pressed("rotate_building"):  # Add this action in project settings
+		preview_rotation = (preview_rotation + 1) % 4
+	
 	_handle_removal(delta, anchor_pos)
 	if not main.get_item():
 		if scene:
@@ -48,6 +53,9 @@ func _process(delta: float) -> void:
 
 	if scene:
 		scene.z_index = 100
+		if curr_item and curr_item.is_rotatable:
+			scene.rotation = preview_rotation * PI / 2
+		
 		if can_place:
 			scene.modulate = Color(0.3, 1.0, 0.5, 0.5) 
 		else:
@@ -208,6 +216,9 @@ func place_item(position: Vector2) -> void:
 		
 	var new_scene = item_data.scene.instantiate()
 	new_scene.item_data = item_data
+	
+	if item_data.is_rotatable:
+		new_scene.set_rotation_direction(preview_rotation)
 	
 	var half = item_data.tile_size / 2
 	var visual_pos = position + Vector2(half - grid / 2, half - grid / 2)

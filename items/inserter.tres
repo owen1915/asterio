@@ -17,4 +17,5 @@ max_stack = 99
 buildable = true
 scene = ExtResource("1_ua8b7")
 tile_size = 16
+is_rotatable = true
 metadata/_custom_type_script = "uid://cfni3sbrritcn"

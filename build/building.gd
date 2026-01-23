@@ -6,7 +6,7 @@ var not_ghost = false
 var health
 @onready var building_manager = null
 @onready var texture_progress_bar: TextureProgressBar = $TextureProgressBar
-
+var rotation_dir = 0
 @onready var main
 
 func _ready() -> void:
@@ -52,3 +52,25 @@ func update_progress_bar() -> void:
 		texture_progress_bar.visible = true
 	else:
 		texture_progress_bar.visible = false
+
+func set_rotation_direction(dir: int) -> void:
+	rotation_dir = dir
+	rotation = dir * PI / 2
+	_on_rotation_changed()
+
+func _on_rotation_changed() -> void:
+	# Override in child classes
+	pass
+
+# Helper to get directional offset based on rotation
+func get_directional_offset(local_dir: Vector2) -> Vector2:
+	match rotation_dir:
+		0:  # North (default)
+			return local_dir
+		1:  # East (90° clockwise)
+			return Vector2(-local_dir.y, local_dir.x)
+		2:  # South (180°)
+			return Vector2(-local_dir.x, -local_dir.y)
+		3:  # West (270° clockwise)
+			return Vector2(local_dir.y, -local_dir.x)
+	return local_dir
