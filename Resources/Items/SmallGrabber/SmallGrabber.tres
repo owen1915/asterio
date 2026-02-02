@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=5 format=3 uid="uid://dnsepojia4bks"]
+
+[ext_resource type="Script" uid="uid://bxjfian0dcxaq" path="res://Resources/Objects/InventoryItem.gd" id="1_crnce"]
+[ext_resource type="PackedScene" uid="uid://edq4u6i85ysa" path="res://Buildings/SmallGrabber/SmallGrabber.tscn" id="1_q02f5"]
+[ext_resource type="Texture2D" uid="uid://bo83g1rgnxnh7" path="res://Buildings/SmallGrabber/sprite/SmallGrabber.png" id="3_81j2u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb67e"]
+atlas = ExtResource("3_81j2u")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_crnce")
+name = "SmallGrabber"
+quantity = 0
+texture = SubResource("AtlasTexture_xb67e")
+action = ""
+buildable = true
+scene = ExtResource("1_q02f5")
+tilesize = 16
+metadata/_custom_type_script = "uid://bxjfian0dcxaq"

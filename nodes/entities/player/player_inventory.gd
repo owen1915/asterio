@@ -1,1 +1,0 @@
-xtends InventoryData

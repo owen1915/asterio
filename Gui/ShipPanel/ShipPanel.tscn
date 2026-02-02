@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://53ummof4gkp3"]
+
+[ext_resource type="Script" uid="uid://bf6sps0akvc3n" path="res://Gui/ShipPanel/speed_panel.gd" id="1_pqw2y"]
+[ext_resource type="FontFile" uid="uid://de30uc03cv6qg" path="res://fonts/8bitOperatorPlus-Bold.ttf" id="2_pqw2y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqw2y"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.376471)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0nud6"]
+font = ExtResource("2_pqw2y")
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ShipPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(150, 70)
+offset_right = 57.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqw2y")
+script = ExtResource("1_pqw2y")
+
+[node name="SpeedLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "100m/s"
+label_settings = SubResource("LabelSettings_0nud6")

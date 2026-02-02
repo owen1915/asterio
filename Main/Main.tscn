@@ -1,0 +1,49 @@
+[gd_scene load_steps=12 format=4 uid="uid://ig4g21hg1clq"]
+
+[ext_resource type="Script" uid="uid://dmn2hs1phfi3d" path="res://Main/main.gd" id="1_6aewd"]
+[ext_resource type="PackedScene" uid="uid://c22dhoknn43mk" path="res://Main/background/Background.tscn" id="1_83ytx"]
+[ext_resource type="PackedScene" uid="uid://cc5il0ojjg0g4" path="res://Entities/Player/Player.tscn" id="1_lxy7q"]
+[ext_resource type="Script" uid="uid://bckwsf05ytmqb" path="res://Main/platform_layer.gd" id="3_ps1la"]
+[ext_resource type="Script" uid="uid://dhv8c8hpft6wy" path="res://Scripts/world.gd" id="3_qg80j"]
+[ext_resource type="TileSet" uid="uid://dqfsk48kvijc" path="res://res/tilemap.tres" id="4_qg80j"]
+[ext_resource type="Script" uid="uid://c2f6c6u6l8mtd" path="res://Main/building_layer_one.gd" id="6_bor5n"]
+[ext_resource type="Script" uid="uid://2u2hw0tqfadx" path="res://Entities/Player/player_inventory.gd" id="6_qg80j"]
+[ext_resource type="PackedScene" uid="uid://c1cpprrlt65an" path="res://Gui/Menu/Menu.tscn" id="7_hh5pf"]
+[ext_resource type="PackedScene" uid="uid://cc1wxw8nlhve6" path="res://Buildings/Core/Core.tscn" id="9_kf8jr"]
+[ext_resource type="Script" uid="uid://bqh8dqaixcayo" path="res://Scripts/speed_manager.gd" id="10_wltqy"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_6aewd")
+
+[node name="Background" parent="." instance=ExtResource("1_83ytx")]
+position = Vector2(16, -2)
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("3_qg80j")
+
+[node name="platform_layer" type="TileMapLayer" parent="World" groups=["platformLayer"]]
+tile_map_data = PackedByteArray("AAAeABIAAAAJAAEAAAAdABIAAAAJAAEAAAAeABMAAAAJAAEAAAAdABMAAAAJAAEAAAAeABEAAAAJAAAAAAAdABEAAAAJAAAAAAAcABEAAAAIAAAAAAAcABIAAAAIAAEAAAAcABMAAAAIAAEAAAAcABQAAAAIAAIAAAAdABQAAAAJAAIAAAAeABQAAAAJAAIAAAAfABQAAAAKAAIAAAAfABMAAAAKAAEAAAAfABIAAAAKAAEAAAAfABEAAAAKAAAAAAA=")
+tile_set = ExtResource("4_qg80j")
+script = ExtResource("3_ps1la")
+
+[node name="building_layer_one" type="TileMapLayer" parent="World" groups=["buildingLayerOne"]]
+y_sort_enabled = true
+tile_set = ExtResource("4_qg80j")
+script = ExtResource("6_bor5n")
+
+[node name="Core" parent="World/building_layer_one" instance=ExtResource("9_kf8jr")]
+position = Vector2(480, 304)
+
+[node name="Player" parent="World" instance=ExtResource("1_lxy7q")]
+y_sort_enabled = true
+position = Vector2(480, 267)
+collision_mask = 5
+
+[node name="Player_Inventory" type="Node" parent="World/Player" groups=["playerInventory"]]
+script = ExtResource("6_qg80j")
+inventory_size = 24
+
+[node name="Menu" parent="." instance=ExtResource("7_hh5pf")]
+
+[node name="Speed" type="Node" parent="." groups=["speed"]]
+script = ExtResource("10_wltqy")

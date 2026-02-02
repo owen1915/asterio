@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://b05353sh3d4d3"]
+
+[ext_resource type="Script" uid="uid://bxjfian0dcxaq" path="res://Resources/Objects/InventoryItem.gd" id="1_usl8b"]
+
+[resource]
+script = ExtResource("1_usl8b")
+quantity = 0
+action = ""
+buildable = false

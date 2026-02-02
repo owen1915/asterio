@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsxt1qtfnngys"]
+
+[ext_resource type="Script" uid="uid://tqgw4qxk02d4" path="res://Buildings/MediumTurret/MediumTurret.gd" id="1_fjw7l"]
+[ext_resource type="Texture2D" uid="uid://twulpclue1v7" path="res://Buildings/MediumTurret/sprite/MediumTurret.png" id="2_ieslk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f2h4"]
+atlas = ExtResource("2_ieslk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6y5f"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw2l8"]
+atlas = ExtResource("2_ieslk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57hmh"]
+size = Vector2(20, 12)
+
+[node name="MediumTurret" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_fjw7l")
+TileSize = 32
+item = "MediumTurret"
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_6f2h4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a6y5f")
+
+[node name="Head" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="HeadSprite" type="Sprite2D" parent="Head"]
+texture = SubResource("AtlasTexture_lw2l8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_57hmh")

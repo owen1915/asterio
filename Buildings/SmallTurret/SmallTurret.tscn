@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr6xycirjg3fj"]
+
+[ext_resource type="Script" uid="uid://cx7pt1mf38kwr" path="res://Buildings/SmallTurret/SmallTurret.gd" id="1_gdurt"]
+[ext_resource type="Texture2D" uid="uid://ctjonkds48kex" path="res://Buildings/SmallTurret/sprite/SmallTurret.png" id="2_2tjuj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4mm4"]
+atlas = ExtResource("2_2tjuj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl65a"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdymd"]
+atlas = ExtResource("2_2tjuj")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ic32c"]
+size = Vector2(11, 6)
+
+[node name="SmallTurret" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_gdurt")
+item = "SmallTurret"
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_l4mm4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_rl65a")
+
+[node name="Head" type="CharacterBody2D" parent="."]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="HeadSprite" type="Sprite2D" parent="Head"]
+texture = SubResource("AtlasTexture_jdymd")
+offset = Vector2(0, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+visible = false
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_ic32c")

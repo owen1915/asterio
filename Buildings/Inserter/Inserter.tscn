@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6fvgt3nhsemg"]
+
+[ext_resource type="Script" uid="uid://jsoupioaf3wi" path="res://Buildings/Inserter/inserter.gd" id="1_74kdy"]
+[ext_resource type="Texture2D" uid="uid://dhqo7t6fqvorb" path="res://Buildings/Inserter/Sprite/Inserter.png" id="2_ueemf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsdlf"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8iow"]
+atlas = ExtResource("2_ueemf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sthsv"]
+atlas = ExtResource("2_ueemf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ecxc"]
+size = Vector2(8, 5)
+
+[node name="Inserter" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_74kdy")
+item = "Inserter"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bsdlf")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_c8iow")
+
+[node name="Arm" type="CharacterBody2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Arm"]
+texture = SubResource("AtlasTexture_sthsv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_4ecxc")

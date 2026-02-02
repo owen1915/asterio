@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvq4nhgxrupy6"]
-
-[ext_resource type="Texture2D" uid="uid://b5377omkxnsrf" path="res://build/gun_turret/bullet/sprite/bullet.png" id="1_ghlg8"]
-[ext_resource type="Script" uid="uid://bm8xqs7ye23ug" path="res://build/gun_turret/bullet/bullet.gd" id="2_2fqmf"]
-
-[node name="Bullet" type="Sprite2D"]
-texture = ExtResource("1_ghlg8")
-script = ExtResource("2_2fqmf")

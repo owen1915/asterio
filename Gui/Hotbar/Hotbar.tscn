@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbbtuokl8vb18"]
+
+[ext_resource type="Script" uid="uid://c553pqdsu0jui" path="res://Gui/Hotbar/HotbarContainer.gd" id="1_iamvw"]
+[ext_resource type="PackedScene" uid="uid://ckcv1eqnb1sq" path="res://Gui/Hotbar/HotbarButton.tscn" id="2_atqo7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nuksj"]
+
+[node name="PanelContainer" type="PanelContainer"]
+layout_direction = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -32.0
+offset_right = 142.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2.5, 2.5)
+pivot_offset = Vector2(142, 80)
+script = ExtResource("1_iamvw")
+
+[node name="Hotbar Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="InventoryButton" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nuksj")
+
+[node name="InventoryButton2" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nuksj")
+
+[node name="InventoryButton3" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nuksj")
+
+[node name="InventoryButton4" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nuksj")
+
+[node name="InventoryButton5" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nuksj")
+
+[node name="InventoryButton6" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2
+
+[node name="InventoryButton7" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2
+
+[node name="InventoryButton8" parent="Hotbar Container" instance=ExtResource("2_atqo7")]
+layout_mode = 2

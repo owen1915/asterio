@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1cpprrlt65an"]
+
+[ext_resource type="Script" uid="uid://deu1u32idn7d6" path="res://Gui/Menu/menu.gd" id="1_60hjl"]
+[ext_resource type="PackedScene" uid="uid://bfxawumy8fojc" path="res://Gui/Menu/Inventory/Inventory.tscn" id="1_tv6jk"]
+[ext_resource type="PackedScene" uid="uid://cjp16x5anh3pr" path="res://Gui/Menu/MenuBar/MenuBar.tscn" id="2_juodk"]
+[ext_resource type="PackedScene" uid="uid://b2w4ic6c0ap45" path="res://Gui/Crafting/Crafting.tscn" id="5_02my8"]
+[ext_resource type="PackedScene" uid="uid://dbbtuokl8vb18" path="res://Gui/Hotbar/Hotbar.tscn" id="5_sf7tr"]
+[ext_resource type="PackedScene" uid="uid://53ummof4gkp3" path="res://Gui/ShipPanel/ShipPanel.tscn" id="6_sf7tr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_juodk"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 14
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_60hjl")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -46.0
+offset_right = 96.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(96, 46)
+theme_override_styles/panel = SubResource("StyleBoxFlat_juodk")
+
+[node name="MenuVBox" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MenuBar" parent="PanelContainer/MenuVBox" instance=ExtResource("2_juodk")]
+layout_mode = 2
+
+[node name="Inventory" parent="PanelContainer/MenuVBox" instance=ExtResource("1_tv6jk")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Crafting" parent="PanelContainer/MenuVBox" instance=ExtResource("5_02my8")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Hotbar" parent="." instance=ExtResource("5_sf7tr")]
+
+[node name="ShipPanel" parent="." instance=ExtResource("6_sf7tr")]
+offset_right = 150.0
+offset_bottom = 70.0
+size_flags_horizontal = 4

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://edq4u6i85ysa"]
+
+[ext_resource type="Script" uid="uid://dp0dm75scf8me" path="res://Buildings/SmallGrabber/SmallGrabber.gd" id="1_3kpa7"]
+[ext_resource type="Texture2D" uid="uid://bo83g1rgnxnh7" path="res://Buildings/SmallGrabber/sprite/SmallGrabber.png" id="2_aqmhu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vx8b"]
+atlas = ExtResource("2_aqmhu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfv7a"]
+size = Vector2(12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2mbr"]
+atlas = ExtResource("2_aqmhu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgpaa"]
+size = Vector2(8, 7)
+
+[node name="SmallGrabber" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_3kpa7")
+item = "SmallGrabber"
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_3vx8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wfv7a")
+
+[node name="Head" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="Head"]
+texture = SubResource("AtlasTexture_q2mbr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_dgpaa")
