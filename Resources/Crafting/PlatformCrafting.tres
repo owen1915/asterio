@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CraftingItem" load_steps=3 format=3 uid="uid://gsax3s51xrbr"]
+
+[ext_resource type="Resource" uid="uid://xiub2jp87863" path="res://Resources/Items/Platform/PlatformInventory.tres" id="1_oetsg"]
+[ext_resource type="Script" uid="uid://bk3t5l6pjypp5" path="res://Resources/Objects/CraftingItem.gd" id="2_14eqo"]
+
+[resource]
+script = ExtResource("2_14eqo")
+inventoryItem = ExtResource("1_oetsg")
+requires = Dictionary[String, int]({
+"Stone": 1
+})
+makes = 1
+tooltip = "1 Stone
+for
+1 Platform"
+metadata/_custom_type_script = "uid://bk3t5l6pjypp5"

@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://cs74r5h81actd"]
+
+[ext_resource type="Script" uid="uid://c44yevemebubf" path="res://Gui/Crafting/crafting_button.gd" id="1_080y4"]
+[ext_resource type="Texture2D" uid="uid://botas4v173yba" path="res://res/spritesheet.png" id="1_u6y1f"]
+[ext_resource type="LabelSettings" uid="uid://yajdowowcg5x" path="res://fonts/font.tres" id="2_080y4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_080y4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ki2i"]
+atlas = ExtResource("1_u6y1f")
+region = Rect2(320, 96, 16, 16)
+
+[node name="CraftingButton" type="Button"]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(8, 8)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_080y4")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_080y4")
+script = ExtResource("1_080y4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0ki2i")
+
+[node name="Control" type="Control" parent="TextureRect"]
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(8, 8)
+mouse_filter = 2
+
+[node name="ItemTexture" type="TextureRect" parent="TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 2
+
+[node name="ItemQuantity" type="Label" parent="TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+offset_right = 10.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+label_settings = ExtResource("2_080y4")
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

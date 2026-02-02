@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://d3intxbvnkd1u"]
+
+[ext_resource type="Script" uid="uid://bxjfian0dcxaq" path="res://Resources/Objects/InventoryItem.gd" id="1_nsmp5"]
+[ext_resource type="Texture2D" uid="uid://botas4v173yba" path="res://res/spritesheet.png" id="2_73km6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slgob"]
+atlas = ExtResource("2_73km6")
+region = Rect2(384, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_nsmp5")
+name = "Stone"
+quantity = 0
+texture = SubResource("AtlasTexture_slgob")
+action = ""
+buildable = false
+tilesize = 16
+metadata/_custom_type_script = "uid://bxjfian0dcxaq"

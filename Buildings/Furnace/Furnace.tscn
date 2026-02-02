@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1jbw41qt6sg6"]
+
+[ext_resource type="Script" uid="uid://dp4c8uslnjlpo" path="res://Buildings/Furnace/furnace.gd" id="1_o0xb7"]
+[ext_resource type="Texture2D" uid="uid://botas4v173yba" path="res://res/spritesheet.png" id="2_u4aqj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr1u5"]
+atlas = ExtResource("2_u4aqj")
+region = Rect2(384, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ar33n"]
+size = Vector2(14, 14)
+
+[node name="Furnace" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_o0xb7")
+item = "Furnace"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_lr1u5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ar33n")

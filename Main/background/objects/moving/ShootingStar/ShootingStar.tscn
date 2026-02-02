@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnk1k8y42jfs5"]
+
+[ext_resource type="Texture2D" uid="uid://6o35p0n7pbcu" path="res://res/stars.png" id="1_3l3j7"]
+[ext_resource type="Script" uid="uid://dq505u4tkk5hu" path="res://Main/background/objects/moving/ShootingStar/ShootingStar.gd" id="2_rpobf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or7se"]
+atlas = ExtResource("1_3l3j7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihm2p"]
+atlas = ExtResource("1_3l3j7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1of65"]
+atlas = ExtResource("1_3l3j7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wof3o"]
+atlas = ExtResource("1_3l3j7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ueal3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or7se")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihm2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1of65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wof3o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_khlry"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 126.44
+linear_accel_min = 13.79
+linear_accel_max = 28.73
+color = Color(1, 0.662094, 0.609397, 1)
+
+[node name="ShootingStar" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ueal3")
+autoplay = "default"
+frame_progress = 0.231074
+script = ExtResource("2_rpobf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(-12, 11)
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_khlry")

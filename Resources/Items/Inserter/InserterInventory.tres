@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=5 format=3 uid="uid://t5xe5wp3d1"]
+
+[ext_resource type="Script" uid="uid://bxjfian0dcxaq" path="res://Resources/Objects/InventoryItem.gd" id="1_owumu"]
+[ext_resource type="PackedScene" uid="uid://c6fvgt3nhsemg" path="res://Buildings/Inserter/Inserter.tscn" id="1_s13cj"]
+[ext_resource type="Texture2D" uid="uid://dhqo7t6fqvorb" path="res://Buildings/Inserter/Sprite/Inserter.png" id="3_xbqwa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jpm7"]
+atlas = ExtResource("3_xbqwa")
+region = Rect2(0, 16, 16, 16)
+
+[resource]
+script = ExtResource("1_owumu")
+name = "Inserter"
+quantity = 0
+texture = SubResource("AtlasTexture_5jpm7")
+action = ""
+buildable = true
+scene = ExtResource("1_s13cj")
+tilesize = 16
+metadata/_custom_type_script = "uid://bxjfian0dcxaq"

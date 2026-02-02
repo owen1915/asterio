@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CraftingItem" load_steps=2 format=3 uid="uid://cbv2ge27clfmm"]
+
+[ext_resource type="Script" uid="uid://bk3t5l6pjypp5" path="res://Resources/Objects/CraftingItem.gd" id="2_10d03"]
+
+[resource]
+script = ExtResource("2_10d03")
+requires = Dictionary[String, int]({})
+makes = 0

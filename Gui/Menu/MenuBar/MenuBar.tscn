@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjp16x5anh3pr"]
+
+[ext_resource type="Script" uid="uid://ddvkvvva01faf" path="res://Gui/Menu/MenuBar/menubar.gd" id="1_17ci2"]
+[ext_resource type="PackedScene" uid="uid://jo8s04qiha3x" path="res://Gui/Menu/MenuBar/MenuInventoryButton.tscn" id="2_acveg"]
+[ext_resource type="PackedScene" uid="uid://oc1lup32bw5q" path="res://Gui/Menu/MenuBar/MenuCraftingButton.tscn" id="3_yic3n"]
+[ext_resource type="PackedScene" uid="uid://bxi8d2fcws6j5" path="res://Gui/Menu/MenuBar/MenuEquipmentButton.tscn" id="4_cehr0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yic3n"]
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 64.0
+offset_bottom = 32.0
+pivot_offset = Vector2(96, 16)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yic3n")
+script = ExtResource("1_17ci2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MenuInventoryButton" parent="HBoxContainer" instance=ExtResource("2_acveg")]
+layout_mode = 2
+
+[node name="MenuCraftingButton" parent="HBoxContainer" instance=ExtResource("3_yic3n")]
+layout_mode = 2
+
+[node name="MenuEquipmentButton" parent="HBoxContainer" instance=ExtResource("4_cehr0")]
+layout_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/MenuInventoryButton" to="." method="_on_menu_inventory_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuCraftingButton" to="." method="_on_menu_crafting_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuEquipmentButton" to="." method="_on_menu_equipment_button_pressed"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://c22dhoknn43mk"]
+
+[ext_resource type="Texture2D" uid="uid://bwo6ggvoh5m0" path="res://res/background.png" id="1_jm34u"]
+[ext_resource type="Script" uid="uid://c7nq33ahq01t3" path="res://Main/background/objects/moving/moving_objects.gd" id="2_40747"]
+[ext_resource type="PackedScene" uid="uid://7cw174k1106v" path="res://Main/background/objects/OrangeStar.tscn" id="2_dvjy4"]
+
+[node name="Background" type="Node2D"]
+
+[node name="Backround" type="TextureRect" parent="."]
+offset_left = -1030.0
+offset_top = -606.0
+offset_right = 890.0
+offset_bottom = 474.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_jm34u")
+
+[node name="moving_objects" type="Node2D" parent="."]
+script = ExtResource("2_40747")
+
+[node name="orangestars" type="Node2D" parent="."]
+visible = false
+
+[node name="OrangeStar" parent="orangestars" instance=ExtResource("2_dvjy4")]
+position = Vector2(354, 217)
+
+[node name="OrangeStar2" parent="orangestars" instance=ExtResource("2_dvjy4")]
+position = Vector2(723, 100)
+scale = Vector2(4, 4)
+
+[node name="OrangeStar3" parent="orangestars" instance=ExtResource("2_dvjy4")]
+position = Vector2(424, 356)
+scale = Vector2(2, 2)
+
+[node name="OrangeStar4" parent="orangestars" instance=ExtResource("2_dvjy4")]
+position = Vector2(562, 236)
+scale = Vector2(2.5, 2.5)
+
+[node name="OrangeStar5" parent="orangestars" instance=ExtResource("2_dvjy4")]
+position = Vector2(446, 116)
+scale = Vector2(3, 3)

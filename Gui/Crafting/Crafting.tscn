@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2w4ic6c0ap45"]
+
+[ext_resource type="PackedScene" uid="uid://cs74r5h81actd" path="res://Gui/Crafting/CraftingButton.tscn" id="1_307t8"]
+[ext_resource type="Script" uid="uid://j3uxqnrvdwn7" path="res://Gui/Crafting/crafting.gd" id="1_gdium"]
+[ext_resource type="Script" uid="uid://ddi4qbiv0uadn" path="res://Gui/Crafting/crafting_button_platform.gd" id="3_38rvf"]
+[ext_resource type="Resource" uid="uid://gsax3s51xrbr" path="res://Resources/Crafting/PlatformCrafting.tres" id="4_e6quj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e6quj"]
+
+[node name="Crafting" type="PanelContainer"]
+offset_bottom = 4.0
+pivot_offset = Vector2(92, 28)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e6quj")
+script = ExtResource("1_gdium")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 8
+
+[node name="CraftingButton" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+script = ExtResource("3_38rvf")
+crafting_item = ExtResource("4_e6quj")
+
+[node name="CraftingButton2" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton3" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton4" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton5" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton6" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton7" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton8" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton9" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton10" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton11" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton12" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton13" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton14" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton15" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton16" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton17" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton18" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton19" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton20" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton21" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton22" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton23" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
+
+[node name="CraftingButton24" parent="GridContainer" instance=ExtResource("1_307t8")]
+layout_mode = 2
